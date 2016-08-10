@@ -3,10 +3,10 @@ SIZMA TESTİ TEMELLERİ
 
 Sızma Testi Nedir?
 
-Sızma testi,kurumların Bilişim Sistemleri’nin saldırgan öngörüsü ile güvenlik açıklarının tespit edilip bulunan zafiyetlerin kullanılarak sistemlere sızılmaya çalışılması ve raporlanmasıdır.
+Sızma testi,kurumların Bilişim Sistemleri’nin saldırgan öngörüsü ile güvenlik açıklarının tespit edilip bulunan zafiyetlerin kullanılarak sistemlere sızılmaya çalışılması ve raporlanmasıdır.
 Kısaca:saldırılan makinenin risk ve zafiyetlerinin haritasıdır.
 
-Saldırgan ve pentesleri ayıran özellikler
+Saldırgan ve pentest yapan kişileri ayıran özellikler
 	Sınır(scope)
 		Saldırganların hedefe ulaştığında durur.
 		Pentest yapan kişiler bütün sınırı incelemek zorundadır.
@@ -22,6 +22,43 @@ Saldırgan ve pentesleri ayıran özellikler
 Aktive directory
 	Active Directory, Microsoft ağlarında kullanılan, bir servis üzerinden politika yoluyla ulaşılan dizin hizmetidir. Bu veritabanı, kullanıcılar, bigisayarlar, mekanlar, yazıcılar gibi organizasyonun tüm bilgilerini saklar.
 
-SIZMA TESTİ ÇEŞİTLERİ NELERDİR?
+SIZMA TESTİ YÖNTEMLERİ NELERDİR?
+
+	1-Blackbox
+		 Bilgi Güvenliği Uzmanı’na testin gerçekleştirileceği yapı ve sistemle ilgili önceden herhangi bir bilgi verilmeden yapılan sızma yöntemidir.
+		
+	2-Whitebox 
+		 Bilgi Güvenliği Uzmanı’na firma/kurum içindeki tüm yapı veya sistem hakkında bilgi verilen bir yöntemdir.
+	3-Graybox
+		 Whitebox ve Blackbox sızma testleri arasında kalan bir sızma yöntemidir. Bilgi Güvenliği Uzmanı’na yapı veya sistemler hakkında detaylı bilgi verilmez.
+
+ZAFİYET NEDİR ? (Vulnerability)
+
+	Tehdit ve risk oluşturabilecek zayıflıklar, karşı tarafta oluşmaması gereken buglardır.Zafiyetin sisteme verebileceği etkiye göre 1den 5e kadar derecelendirebiliriz.
+
+TEHDİT NEDİR? (Threat)
+
+	Kaynağa zarar verebilecek her türlü kişi,bilgi vb bilgilerdir.
+
+RİSK NEDİR?
+
+	Tehdit ve zafiyet durumunda oluşan (kesişen) durumlardır.
+
+EXPLOİT NEDİR?
+
+	Zafiyeti sömürmek için kullanırız. Exploit sonucunda bir payload elde ederiz.Bu payloadlar sisteme sızmamızı ve istenilen işlemleri gerçekleştirmek için kullanılan araçlardır.
+
+SIZMA TESTİ TÜRLERİ NELERDİR?
+
+	-Network Pentest
+	-Mobile Pentest
+	-Web Pentest
+	-Scala Pentest
+	-Wireless Pentest
+	-Social Engineering
+	-Physical Pentest
+	-Dos/DDos/Load Test
 
 
+
+ 
