@@ -1,0 +1,27 @@
+DERS 1
+SIZMA TESTİ TEMELLERİ
+
+Sızma Testi Nedir?
+
+Sızma testi,kurumların Bilişim Sistemleri’nin saldırgan öngörüsü ile güvenlik açıklarının tespit edilip bulunan zafiyetlerin kullanılarak sistemlere sızılmaya çalışılması ve raporlanmasıdır.
+Kısaca:saldırılan makinenin risk ve zafiyetlerinin haritasıdır.
+
+Saldırgan ve pentesleri ayıran özellikler
+	Sınır(scope)
+		Saldırganların hedefe ulaştığında durur.
+		Pentest yapan kişiler bütün sınırı incelemek zorundadır.
+	Motivasyon
+		Saldırganlarda nefret ve çıkar doğrultusunda yaparlar.
+		Pentest yapan kişiler iş olarak yaparlar.
+	Zaman
+		Saldırganların zaman sınırı yoktur.
+		Pentest yapan kişiler bir zaman doğrultusunda yaparlar.
+
+-Çıkarılan raporda risk haritası çıkarılması gerekmektedir.
+
+Aktive directory
+	Active Directory, Microsoft ağlarında kullanılan, bir servis üzerinden politika yoluyla ulaşılan dizin hizmetidir. Bu veritabanı, kullanıcılar, bigisayarlar, mekanlar, yazıcılar gibi organizasyonun tüm bilgilerini saklar.
+
+SIZMA TESTİ ÇEŞİTLERİ NELERDİR?
+
+
