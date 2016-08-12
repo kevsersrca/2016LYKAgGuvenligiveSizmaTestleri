@@ -1,0 +1,755 @@
+06/08/2016 1.Gün
+---Sızma testi nedir?
+- Bir saldırgan profilinin en yakın haliyle sistemin zafiyatlarını tespit edip risk haritasını çıkararak çözüm önerilerinde bulunulması hizmeti.
+- Bir saldırgan ile bir pen. tester arasında üç temel fark vardır. Bunlar: kapsam, motivasyon ve zamandır.
+- Saldırgan herhangi bir kapsam(sınır) tanımazken pen. tester hedef ile anlaştığı kapsamlar içerisinde çalışır. 
+- Her ikisinin de motivasyonları farklıdır. 
+- Saldırgan zaman konusunda sıkıntı yaşamaz. Pen. tester ise belirli bir süre içerisinde vereceği hizmeti tamamlar. Bu zaman dilimini müşteri ve pen. tester ortak belirler.
+- Müşteri günün sonunda zafiyetlerinin raporlanmasını bekler. Ayrıca bir saldırgan için tek bir zafiyet yeterli olabilir ancak pen. tester sistemi tamamen taramalıdır.
+- Her sızma testi sonucunda ortaya illa çok kritik zafiyatlar çıkacak diye bir kural yok. Bu pen. tester için işin handikapıdır.
+- Bazen istemciler e-mail yolladıkları zaman, e-maili yollayan makinenin lokal IP adresini de, e-maili yollayan hakkındaki bilgiler kısmına eklerler. 
+Domain kontrol(Windows tarafı): Windows makinaları bir katalog üzerinden politika bazlı tek bir noktadan yönetmek için kullanılan teknoloji.
+
+-----Moladan sonra------- 
+
+---Sızma Testi Çeşitleri
+
+1)Black Box
+2)White Box
+3)Gray Box
+
+-Black Box: Test edilen kurumun size hiçbir bilgi vermediği test türüdür. Kapsam size aittir. Dışarıdan bir saldırganın verebileceği hasar simüle edilir.
+-White Box: Kurumun bize gerekli bilgileri sağladığı test türüdür. Yüksek yetkilere sahip birisinin verebileceği hasar simüle edilir.
+-Gray Box: White Box ve Black Box arası bir test türüdür. Bazı bilgiler verilir. Black Box'a kıyasla maliyet azalır. Düşük yetkilere sahip birisinin verebileceği hasar simüle edilir.
+
+Her yazılımın yayınlanmadan önce güvenlik testlerinin yapılması zorunludur. Eğer yazılım yeterince güvenli değilse yayınlanma tarihi ertelenir. Yazılım daha güvenli hale getirildikten sonra yayınlanır.
+
+-Zafiyet: Bir sistemin ihtiyacı karşılamak üzere yapılmış tasarımının dışında işleri yapabilmenizi sağlayan aksaklıklıklara zafiyet denir.
+
+-Tehdit: Zarar verebilecek kişi, şahıs veya bot(?)
+
+-Risk: Tehdit ve zafiyetin kesiştiği noktadır.
+
+Her zafiyet 1-5 arasında derecelendirilir. Bu derecelendirme zafiyetin size olası etkileri baz alınarak belirlenir.
+
+-Exploit: Sömürme. Zafiyeti sömürmek için gönderdiğin kod. 
+
+-Payload: Exploit ile kontrolü elde edilen şeylerin kontrolü ele alındıktan sonra yapılan ve yapılabilecek işlemlere denir.
+
+---Genel Kavramlar
+
+1)Penetration test
+2)Vulnerability/Security Assessment
+3)Security Audit
+4)Ethical Hacking
+
+1-Sızma testi, hacking işleminin teknik aşamalarını kapsayan sürecin genel adıdır.
+2-Zafiyet araması, sızma testinin bir aşamasıdır.
+3-Hedefin güvenlik seviyesinin olması gereken seviyede olup olmadığını değerlendirmektir.
+4a-Hacking: Bir sistemi doğası dışında çalıştırabilme kabiliyetine hacking denir.
+4b-Ethical Hacking: Tespit edilen zafiyetin sistemi geliştirmek için kullanılmasına Ethical Hacking denir.
+
+---Penetrasyon Testi Türleri
+
+1)Network Pen. Test
+2)Mobile Pen. Test
+3)Web Pen. Test
+4)Scada Pen. Test (Embedded(Gömülü) Systems)
+5)Wireless Pen. Test
+6)Social Engineering
+7)Dos/DDos/Loadtest
+
++Wireless neden Network'e dahil değil?
+-Wireless ortamında network olmak zorunda mı? Bluetooth?
+
++SQL Injection hangisine dahil?
+-Web geliştirme için kullanılan bir araç olduğundan web pen. test kategorisine girer.
+
+---Mola (1.5saat)---
+
+---14.00---
+
+---Saldırı Aşamaları
+
+1)Reconnaissance(Bilgi Toplama)
+2)Scanning
+3)Exploitation
+4)Persistency
+5)Footprinting 
+6)1.aşamaya geri dön.
+
+1- Hedefin sınırlarını belirler. İçerideki şahıslar hakkında bilgi toplar. Bu aşama ile sosyal mühendislik kullanılarak saldırabilmek için bilgi elde edilebilir. Karşı hedef sistemde kullanılan yazılımlar, ürünler, işletim sistemleri öğrenilir. Bu aşamaya ait metotlar: Çöp karıştırmak, stalking...
+
+2- Hedef organizasyonun zafiyetlerin (açık olan girdi noktalarını dinleyen portların vs.) tespit edildiği bölüm.
+
+3- Hack işleminin yapıldığı bölüm.
+4- Kendinizi kalıcı kılmak için sistemde bir erişim noktası oluşturduğunuz bölüm. Bu aşamanın dahil edildiği örnek senaryo: kurum hali hazırda güvenlik için bir takıma sahiptir.(Blue Team). Bu takıma haber vermeden sizin saldırmanızı ister (Red Team) ve Blue Team'ın nasıl tepki vereceğini görmek ister.
+5- Yaptığımız işlemlerin izlerini temizlediğimiz bölüm.  
+7- Dos ve DDos sistemi aşırı yükleyerek yıkmak ister. Loadtest ise belli senaryolarda sistemin maksimum kapasitesini belirlemek için uygulanır.
+
+-Saldırgan ve pen. tester arasındaki iki fark daha: erişim yöntemi ve metotlar.-
+
+Zeroday: Bugün hiç kimsenin bilmediği, bir gün birinin rasgele ortaya çıkartacağı zafiyet.
+Pen. tester olarak zeroday bulmak gibi bir sorumluluğumuz yok.
+
+OSInt(Open Source Intelligence): Hani instagram'da eski sevgilisini yeni sevgilisinin fotoğrafıyla gören kız var ya, heh işte o fotoğrafı gördükten sonra gördüğü kızın teyzesinin oğlunun göbek adına kadar öğrenmesini sağlayan yöntemler işte. Türkçesi = Açık kaynak istihbaratı.
+
+---Metadolojiler---
+
+-İzlenilecek olan yöntemleri belirli bir standarta oturtmak için oluşturulmuş tanımlama sistemi.
+
+1)OSSTMM
+2)Nist(National Institute of Standards)
+3)OWASP
+4)Penetration Testing Framework
+
++Scope(kapsam) nasıl belirlenir?
+-Test yapılacak hedef hakkında bazı bilgiler öğrenildikten sonra çalışılan ortam, sistemin türleri, kullanılan teknolojiler öğrenilip belli bir profil çıkartılır. (Blog, e-ticaret sitesi, banka sitesi).Scope'da bu profile göre çizilir.
+
++Rapor nasıl yazılır?
+-Bulunan zafiyetler hedefe raporlanır. Ardından hedef bu zafiyetleri kapattığını belirttikten sonra aynı zafiyetler kullanılarak tekrar hackleme işlemi denenir. Eğer kapanmamışsa kapanana kadar zafiyet tekrar raporlanarak bu süreç devam eder. Zafiyetler kapandıktan sonra iş biter.
+
++Rapor formatları?
+1)Executive Summary(Yönetici Özeti): Teknik anlamda bilgi vermeyip, riskin geneliyle ilgili bilgilerin yer aldığı kısım.
+2)Introduction(Giriş): Anlaşmanın kimler arasında yapıldığı, ne zaman başlandığı, kapsam, raporlama süresi vs. bilgilerin bulunduğı kısım.
+3)Methodology(Metodoloji): Testin hangi yöntemler kullanılarak gerçekleştiğini anlatan kısım.
+4)Findings(Bulgular): Tehdit seviyeleri belirtilir.
+-Critical
+-High
+-Medium
+-Low
+-Info
+5)Conclusion(Sonuç): Özet.
+6)Appendings(Ekler): Bazı bulguların açıklamasına referans verdiğiniz kısımdır.
+
+Not: Şifre ve hangi makinelerin bu şifreye sahip olduğu hakkında yapılan tablo 1,2 veya 6.aşamaya dahil edilir.
+
++Pen. test iş süreci?
+-Kurumla anlaşırken NDA(Bilgi gizliliği anlaşması) imzalanır. Sonrasında testin kapsamının ortaya çıkarılması için test edilecek ortam hakkında bilgi alış-verişi yapılır. Ardından maliyet ve süre hesaplanır ve teklif yapılır. Kapsam(scope) belirlenir. İzin kağıdı alınır(hapse girmenizi önleyecek olan kağıt).
+
+Not: Rapor teslim edildikten sonra karşı tarafın aksiyon alması için 10-15 gün beklenir.
+
+Not2: Rapor çat diye yollanmaz. Rapor şifrelenir. Şifrelendikten sonra yollanır. Şifre de ayrı bir kanaldan yollanır. (NDA anlaşması gereği gizlilik kurallarını ihlal etmemek için) Ayrıca rapor belli bir süre(anlaşmada belirlenen) sonra silinir.
+
+Not3: Testler tek seferlik değil, belli süre aralığında tekrar tekrar yapılıyorsa rapor her test için ayrı ayrı yollanmak yerine süreç bittiğinde toplu olarak yollanabilir. Ayrıca tam tersi olarak, eğer çok kritik bir zafiyet bulunduysa sadece o zafiyeti özetleyen tek sayfalık bir rapor da acil olarak yollanabilir.
+
+---Mola 20dk---
+
+---Ağ Temelleri---
+
+-OSI Katmanları:
+7)Application Layer(Uygulama Katmanı)
+6)Presentation ""(Sunum Katmanı)
+5)Session ""(Oturum Katmanı)
+4)Transportation ""(Taşıma Katmanı)
+3)Network ""(Ağ Katmanı)
+2)Data/Link ""(Veri Katmanı)
+1)Physical ""(Fiziksel Katman)
+
+1-Elektrik akımlarını 1 ve 0 olarak yorumlar.
+2-Veriyi nasıl transfer edeceğinizi yorumlayan katman. (MAC)
+3-Adresleme işleminin yapıldığı katman. (IP)
+4-Paketlerin gönderilip alındığı katman. (TCP/UDP)
+5-Bağlantıdaki oturumların takibinin yapıldığı katman.
+6-Veri uygulama katmanında kullanıcıya gösterilmeden önce dosyada yapılacak olan format değişikliklerinin yapıldığı katman. (SSL)
+7-Verinin en son halinin kullanıcıya gösterildiği katman.
+
+7-6-5 => Uygulama(Application), 4-3-2 => Ağ(Network), 1 => Fiziksel(Physical)
+
+MAC: Kullanılan donanımın adresi. 48bit. AA:BB:CC:DD:EE:FF formatında gösterilir. AA:BB:CC kısmı üretici kimliğinin yer aldığı kısımdır ve unique(eşsiz)dir. DD:EE:FF kısmı ürün kimliğinin yer aldığı kısımdır.
+
++Ethernet networkleri için Data/Link katmanına denk gelen protokellerin isimleri nedir?
+-ARP/RARP. ARP: MAC bilgisi kullanılarak sistemin fiziksel lokasyonunu tespit eden protokol. RARP: Fiziksel konumu bilinen sistemle iletişim kurmayı sağlayan protokol.
+
+Hikaye(ARP): Sınıf içerisinde Mehmet ile ulaşılmak isteniyor. Mehmet kim bilmiyoruz. Ne yaparız? Sınıfa gideriz. Mehmet kim diye bağırırız. Mehmet elini kaldırır ve elini kaldıran kişiyle konuşuruz.
+Hikaye(RARP): Sınıfta 3.kümeden 5.sıradaki kişiyle konuşmam gerekiyor. Sınıfa gidip o kişinin kim olduğunu öğrenip o kişiyle konuşuruz.
+Hikaye(Mektup): Mektubu adresine teslim edebilmek için 1)Kime yolladığımız 2)Nerede olduğu bilgisine ihtiyacımız var. ARP protokolünde 1 var, bunla 2'yi elde ediyoruz. RARP protokolünde 2 var, bunla 1'i elde ediyoruz.
+
+IP(Internet Protocol): Her bir makinanın kendine ait eşsiz bir adresi olsun diye geliştirilmiş bir protokol.
+IPV4: 32bit - IPV6: 128bit 
+
+IPV4: 192.168.1.1 => IIIIIIII.IIIIIIII.IIIIIIII.IIIIIIII (10'luk sistemdeki sayıyı 2'lik sisteme dönüştürmek) Mümkün aralık: 0.0.0.0 - 255.255.255.255
+
+Alt ağ maskesi: 2lik sayı sisteminde belli bir noktanın solu tamamen 1, sağı tamamen 0 yapılır. 10luk sisteme geri döndürüldüğünde elde ettiğimiz sayı alt ağ maskesidir. 1'lenen kısım Network IP'sine, 0'lanan kısım Broadcast IP'sine eşittir.
+
+192.168.10.0 sorusu ödev
+
+192.168.10.0 => 11000000.10101000.00001010.00000000
+
+*********************************************************************
+
+------07/08/2016--------
+
+-Ödevin çözümü-
+192.168.10.0 - 255 IP adresini bir makineye vermek istiyoruz.
+
+çentiğin sağ tarafı : host
+çentiğin sol tarafı: network
+
+IIIIIIII.IIIIIIII.IIIIIIII.IIIIIIII
+11000000.10101000.000010|10.00000000 => subnet'e çevir:
+
+11111111.11111111.11111100.00000000
+255.255.252.0
+
+CIDR ile gösterimi: 192.168.10.0/22
+
+11000000.10101000.000010|10.00000000 => 
+
+11000000.10101000.0000101|0.11111111 (çentiği 1 tık sağa kaydırdık)
+192.168.10.0/23 IP adresi
+192.168.11.255 => broadcast adresi
+
++Çentiği en sola çekip sağ tarafını 0'larsak ne olur?
+-0.0.0.0/0 => bütün dünyadaki IPv4 alt ağlarına tekabül eder.
+
++Çentiği en sola çekip sağ tarafını 1'lersek ne olur?
+255.255.255.255 => bütün makinaların broadcast adresine tekabül eder.
+
+---RFC 1918
+
+-Public (internet) unique
+-Private (Public içerisindeki yerel ağdaki makinalara verilen IP, diğer private ağlarda da aynı ip kullanılabilir. unique değildir.)
+
+-Private'deki bir makina internete erişmek istediğinde public'e dönüşmesi gerekir. Bu işlem NAT ile gerçekleşir.
+
+-Şu adresler private olarak kullanılmak üzere ayrılmıştır:
+
+10.0.0.0        -   10.255.255.255  (10/8 prefix)
+172.16.0.0      -   172.31.255.255  (172.16/12 prefix)
+192.168.0.0     -   192.168.255.255 (192.168/16 prefix)
+
+-Yani eğer birisi 172.18 ip adresinden saldırı alıyorum diyorsa, ya yerel ağdan saldırı geliyordur, ya da ip adresi değiştirilmiştir.
+
+---Mola 15dk---
+
+-IPv4 havuzunu kendi içinde class'lara bölmüşler:
+-A, B, C, D(multicast için reserve), E(komple reserve)
+
+-Multicast: grup mesajı
+-Unicast: birebir mesaj
+-Broadcast: toplu mesaj (whatsapp örneği)
+
+-127.0.0.0/8 => hem public hem private olarak kullanılmayan bir grup:
+-Bir network olmasa dahi makinelerin birbirlerine bağlanabilmesi için ayrılmış grup. (yerel ağ)
+
+-169.254.0.0/16 (Apipa) => hem public hem private olarak kullanılmayan bir grup:
+-IP adresi manuel veya otomatik olarak verilmeyen makineler için ayrılmış grup. Bu gruptan IP'yi almadan önce o ağda broadcast yapar ve eğer o IP alınmamışsa kendisine reserve eder.
+
+---Transport Katmanı:
+-Bu katmandaki protokoller: TCP/UDP/ICMP
+
+-ICMP (Internet Control Message Protocol): TCP/IP'nin düzgün çalışıp çalışmadığını kontrol eden protokoldür. 
+Örnek: ICMP echo request, echo reply (ping atmak). Karşı tarafın ayakta olup olmadığını öğrenmek. 
+
+---IP Header: Genişliği 32bit'tir. Kendi içerisinde bölümlere ayrılarak belli bir standarta oturulmuştur.
+
+-Version: (4bit) Gelen paketin IPv4 veya IPv6 olduğunun yorumlandığı kısım.
+-IHL: (4bit) Yollanan pakete nasıl davranılacağını bildiren kısım. Acil mi veya bekleyecek mi vs.
+-Total Length: (16bit) 2^16 = 65535byte (Maksimum Toplam Uzunluk) Paketin uzunluk bilgisinin olduğu kısımdır.
+
+-Identification: (16bit) Kimlik bilgisi olarak eklenilen kısım. Host tarafından random oluşturulur.
+
+-Flags: () Yollanan IP paketinin sağlıklı bir şekilde geçirilip geçirilmemesi için yeri geldiğinde parçalanıp parçalanmaması hakkında bilgi veren kısımdır.
+
+-Fragment Offset: () Paket parçalandıysa parça sırasını belirten kısım.
+
+-Time to Live: (8bit) Pakete verilen yaşam süresi. Eğer paket sonsuz döngüye girerse paketin yok etmesi için verilen zamanı belirten kısım. (Kaç kere, saniye vs. değil)
+
+-Header Checksum: (16bit) Paketteki bilgiler bir fonksiyona sokulup elde edilen değer burada belirtilir. Paketi alan kişi buradaki bilgiyi alır ve paketi fonksiyona sokup tekrar aynı değeri alıp almadığını kontrol ederek paketin bozulup bozulmadığını anlar. 
+
+-Source IP Address: (32bit) Paketi gönderenin ip adresi.
+
+-Destination IP Address: (32bit) Paketi alacak makinenin ip adresi.
+
+---ICMP Header
+
+-Type: switch-case deki gibi farklı tipler var, bunların belirtildiği kısım.
+
+-Code:
+
+-Checksum: ip headers ile aynı.
+
+---Wireshark: OSI katmanlarındaki veri 2.katmandan direk wiresharka yönlendirilerek veriyi katmanlardan geçmeden önce izlemeyi sağlayan program. Bu sayede gönderdiğimiz ve aldığımız paketleri detaylıca gözlemleyebiliyoruz.
+
+->Ethernet / Layer 2 => IP / Layer 3 => ICMP 
+
+---Mola 1.5saat---
+
+---Scapy
+
+ls() => desteklenen protokolleri listeleyen metod
+ls(protokol) => @protokol: desteklenen protokol listesinden herhangi bir protokol
+send() => paket gönderme metodu
+
+-Kullandığımız kodlar
+
+ip_header=IP(ttl=10, dst="127.0.0.11", src="127.14.11.1")
+icmp_header=ICMP(type=8, code=0)
+paket=ip_header/icmp_header
+send(paket)
+
+---
+
+ether_header=Ether(src="00:00:00:00:00:00", dst="00:00:00:00:00:00")
+paket=ether_header/ip_header/icmp_header
+sendp(paket)
+
+Not: Eğer layer 2 paket gönderilecekse send metodu kullanılması gerek. eğer layer 3 paket gönderilecekse sendp metodu kullanılır.
+
+kendime not: yurda dönünce root ile wireshark'dan dinlemeyi tekrar dene
+
+---TCP: (3way handshake) Bir bilgisayarla haberleşmek istediğiniz zaman bu haberleşme isteğini karşı tarafa bildirilip karşı taraftan da onay alırsa iletişimin kurulduğu ve bu iletişimin sonlandırılana kadar geçer zaman içerisinde herhang bir kayıp veya sorun yaşanmamasını garanti etmeye çalışan protokoldür.
+
+---Port: Bir makinenin üzerinde kendinden başka makinelerin ulaşabilmesi için açılan bir kapı olarak düşünülebilir. Birden fazla servise erişmek için bu kapılardan hangisi uygunsa oradan girip ordan konuşmaya sağlayan açık kapılardır. Kaç port vardır? 2^16 (Source-Port 16bit olduğu için)
+
+-Sequence Number ve Acknowledgment Number: (32bit) 3way handshake esnasında iletişim kurarken hangi mesajlara cevap verildiğini takip etmek için kullanılan sayılar. cevap +1 yapılarak ve yeni bir sayı verilerek geri yollanır. yeni sayı sequence number'a eklenir. +1 yapılan sayı ancknowledgment number kısmına eklenir.
+
+-Header Length: (4bit) tcp header'in uzunluğunun belirtildiği kısım.
+
+-Code Bits: (6bit) gönderilen paketlerin cinsini belirttiğimiz kısım. örnek (istek yollama paketi, cevap paketi, acil vs.)
+
+-Window Size: (16bit) makinelerin karşı tarafa kapasitesini belirtmek için kullandıkları kısım.
+
+A => syn + x(sequence) 
+B => syn + ack(x+1) + y(sequence)
+A => ack(y+1) + z(sequence)
+
+nc 127.0.0.1 22 -v
+
+kendime not: wireshark root olmadan düzgün çalışmıyor. kaydettiğin dosyaları root'a aktarıp root ile devam et.
+kendime cevap: root ile de çalışmıyor.
+
+-scapy üzerinden örnek:
+
+tcp=TCP(sport=8080, dport=22, flags="S")
+ip3=IP(src="127.0.0.1",dst="127.0.0.1")
+paket3=ip3/tcp
+send(paket3)
+
+---Mola 20dk---
+
++Açık olan bir tcp portuna açık bir servisin koştuğu porta syn paketi yollarsak synack cevabı alırız. peki açık olan bir porta ack paketi yollarsak ne olur?
+-Reset döner. Düzgün başlatmadığınızda veya herhangi bir problemle karşılaşıldığında o protokol sonlandırılır.
+
++Kapalı bir porta syn yollarsak ne olur?
+-Reset döner. Reset'in ne için döndüğünü(port başından beri mi kapalı yoksa bize mi kapatıldı(?)), hangi aşamada reset döndüğünü gözlemleyerek anlayabiliriz.
+
++Port kesin açık. Güvenlik duvarı var. Syn gönderdik. Ne olur?
+-Belli olmaz. Reset dönebilir. Cevap dönmeyebilir.
+
++Port açık mı kapalı mı bilmiyoruz. Syn gönderdik. Cevap gelmedi? Ne oldu?
+-Kesin olan şey: firewall.
+
++Arada firewall var. Ack paketi gönderiyoruz. Reset dönüyor. Firewall'dan mı yoksa host'tan mı reset dönmüştür?
+-Bir de Syn paketi yollayarak anlaşılabilir. Eğer tekrar Reset dönüyorsa firewall'dan dönüyor demektir.
+
+---UDP
+
+-TCP'den farklı olarak dosyanın ulaşıp ulaşmadığını kontrol etmez. Daha hızlıdır. (shoot and forget) TCP'de veri 4.pakette yollanmaya başlanırken UDP'de veri 1.paketten itibaren yollanır. Yani UDP TCP'den 4 kat daha hızlıdır.
+
+-UDP, açık olan portu ve servisi bilip bunlara paket yolladığınızda, ancak o zaman cevap alacağınız bir protokoldür. Eğer buna rağmen cevap gelmiyorsa 2 ihtimal vardır. Ya servis yolladığınız paketi anlamadı, ya da arada firewall var.
+
+-UDP ile veri yolladığımız port kapalıysa ve firewall yoksa; ICMP port kapalı mesajı döndürür.
+
+---DNS
+
+-Domainlerin eşleşen IP'lerini bulmamızı sağlayan sunuculardır. Eğer DNS sunucusu, sorduğumuz domain'in IP'sine sahip değilse, içerisinde statik olarak kazılı olan ROOT DNS sunucularına sorar. DNS IP'yi elde ettiğinde bir daha aramamak için IP adresini cache içerisinde istediği domainden sorumlu sunucunun belirlediği süre boyunca saklar.
+
+-Bu kısım 3.gün öğle dersinde eklendi-
+
+-DNS Kayıt Türleri: Ağ, mx, cname, ns, Ptr, SOA, txt
+
+-Ağ kaydı: istenilen domain'in IP adresini kaydeder.
+
+-mx kaydı: her dns sunucusu bir ya da birden fazla zone(alan)'dan sorumludur. o alan adından sorumlu mail sunucuların bulunduğu kayıt.
+
+-cname kaydı: alias. ağ kayıtlarına işaret eden takma ad.
+
+-ns kaydı:
+
+-Ptr kaydı: ip adresi verip domain sorduğumuzda geri dönen kayıt türü.
+
+-SOA kaydı: zone'un kendisine dair ve master dns sunucusuna dair bilgilerin bulunduğu kayıt.
+
+-txt kaydı: opsiyonel olarak bilgi tutulmak istendiğinde kullanılan kayıtlar.
+
+-Örnekler:
+
+=> dig www.linux.org.tr veya dig www.linux.org.tr A (önceden benim dns sunucum olarak kaydedilen kişi kimse ona sorgu gidecek)
+
+-ns kaydı sormak için:
+=> dig linux.org.tr NS (www'ları çıkarma sebebimiz host'tan sorumlu ns kaydının olmaması)
+
+-SOA kaydı için:
+=> dig linux.org.tr SOA
+
+-otoritelere sormak:
+
+=> dig www.linux.org.tr @frig.linux.org.tr
+=> dig www.linux.org.tr @8.8.8.8
+
+=> dig -x 139.179.139.181 (ip adresi sorup domain elde etmek(reverse))
+
+=> dig linux.org.tr any (ne bulursan getir)
+
+-IP adresine sahip olduğumuz adresin domainini bulabilmek için de DNS servisini kullanabiliriz.
+
+---Mola 1.5saat---
+
+---DHCP (Dynamic Host Control Protocol): 
+
+-Makineye IP, Gateway, DNS, NetMask, Proxy verilebilir. 
+
+-Lease Time: (Kira süresi) Makinelere verilen IP sürelerinin son kullanma tarihi.
+
+-Eğer DHCP'deki IP havuzları dolduysa, boşa çıkan IP olmadığı sürece yanıt vermez. Makine kendisine arpas(?) sınıfındaki reserve edilmiş IP'lerden bir IP alır.
+
+-Eğer havuzu dolmuş bir DHCP yanına ikinci bir DHCP kurarsak istek gönderen client'ler bize yönlenir ve kontrol edebiliriz.
+
+-MAC adresi değiştirildiğinde DHCP bize yeni bir IP verir. Çünkü bizi MAC adresimizden tanır. Eğer kira süresi yeterince yüksekse, bu işlem yeterince tekrar edilerek DHCP sunucusunun havuzu doldurulabilir.
+
+-Eğer birden fazla DHCP sunucusu varsa, en hızlı olana gidilir. Saldırgan kendi DHCP sunucusunu kurarak bilgileri manipüle edebilir.
+
+---Router
+
+-Ağa bağlanabilme kapasitesi olan makineleri ilgili ağlara yönlendirmesini yapan makinedir.
+
+-Gateway: kargo firmaları örneği. Nasıl gideceğinizi bilmediğiniz yerlere verilerinizi gönderebilmeniz için aracılık yapan router'lara gateway denir.
+
+tcpdump = emektar wireshark
+
+---ETÜT: scapy ile
+
+-dns isteği oluşturup dns sunucusuna yollayıp wireshark ile izle.
+-dhcp isteği oluşturup dhcp servisine gönder. eduroam'a yollayabiliriz.
+
+
+-dns paketi
+
+ip=IP(dest="8.8.8.8")
+udp=UDP(dport=53)
+dns=DNS(rd=1,qd=DNSQR(qname="www.facebook.com"))
+dns_pack=ip/udp/dns
+send(dns_pack)
+
+-dhcp paketi
+
+ip_d=IP(src="0.0.0.0", dst="255.255.255.255")
+udp_d=UDP(sport=68, dport=67)
+dhcp=DHCP(options=[("lease_time", 70000)])
+dhcp_pack=ip_d/udp_d/dhcp
+send(dhcp_pack)
+
+***************************************************************************
+
+---08-08-2016
+
+---Recon (Bilgi Toplama)
+
+---Pasif Bilgi Toplama (OSINT) (Açık Kaynak İstihbaratı): 
+-Senaryo: Black Box pen.test isteniyor:
+-Yapacağımız ilk iş: verilen adresin IP'sini öğrenme yöntemleri 
+=> ping ankara.edu.tr
+=> nslookup
+server 8.8.8.8
+www.ankara.edu.tr
+
+ICANN = bütün dünyadaki ip adreslerinin dağıtılması hakkında arama yapılabilir. 
+RIPE = avrupadaki ip adreslerini aratabileceğimiz yer.
+-www.ankara.edu.tr için elde ettiğimiz ip adresini ripe içerisinde aratıyoruz. elde ettiğimiz net-name'yi tekrar ripe'de aratarak başka bilgilere de ulaşabiliriz.
+
+=> who.is ankara.edu.tr (tr uzantılarda çalışmıyor?)
+=> ipinfo.io (arama servisi)
+=> fierce -dns ankara.edu.tr
+
+-Saldırmadan önce bulabildiğimiz her şeyi toplamaya çalışacağız.
+
+-Subdomain tespiti: google üzerinden => site:*.ankara.edu.tr şeklinde arama yaparsak subdomainlere ulaşabiliriz.
+
+-Hedefe ait virtualhost'ların tespiti: => bing.com arama motorundan ip:x.y.z.a şeklinde arama yaptığımızda virtualhost'lara ulaşabiliriz.
+
+-Hedefe ait e-mailler: => theharvester -d ankara.edu.tr -b bing
+
+-Cloudflare: websitelerine ip değiştirme, bilgileri gizleme, ddos savunmaları gibi hizmetler veriyor. www.osman.com bu adresi cloudflare koruyor. ama subdomainler açıkta kalır.
+
+-Hedefe ait indirilebilir dosyalar: => google => filetype:pdf ankara.edu.tr
+*-2.yöntem = FOCA
+-3.yöntem(stabil değil) = metagoofil
+
+-Lokasyon tespiti: ipinfo.io, ip2location.com, whois.domaintools.com (IP adresini aratarak)
+
+-Reverse whois: IP veriyoruz. bu IP'ye ait bilgilere ulaşıyoruz. siteler: whois.com (sansürlü, güncel), viewdns.info (sansürsüz, eski)
+
+-Netcraft: www.netcraft.com hedefin kullandığı işletim sistemini öğrenebiliriz. Örnek: eğer eski bir apache serveri kullanılıyorsa versiyonuna ait bazı zafiyetlere sahip olabilir. Bu zafiyetler kullanılabilir. Veya => http://whois.domaintools.com/ sitesinden de öğrenilebilir.
+
+-Shodan: www.shodan.io => bilgi toplamak için gelişmiş bir arama motoru. parametreler: hostname:ankara.edu.tr, country:tr alternatif siteler: zoomeye, censys.io(lokasyon + port bilgisi de var)
+
+---Mola 15dk---
+
+-FOCA: hedefe ait indirilebilir bütün veya bazı dosyaları düzenli bir şekilde indirip analiz edebilmemizi sağlayan tool. Metadata analizleri sayesinde bir çok bilgi elde edilebilir. 
+
+-Robtex: www.robtex.com => istenen sitenin network'ünü şema halinde gösteren servis.
+
+-Google üzerinden keşif işlemleri: google filtreleri hakkında detaylı bilgiler=> https://www.exploit-db.com/google-hacking-database/ örnek: site:*.ankara.edu.tr
+
+-Hedefe ait giriş panellerinin tespiti: google filtreleriyle bulunabilir. inurl:login site:*.ankara.edu.tr
+
+-Dump: kötü niyetli kişiler tarafından bir database'in patlatılarak bilgilerin internette herkese açık olarak yayınlanması.
+
+-Hedef domaine benzer domainlerin tespiti: kullanıcı yazım hatası yapıp fark etmeyerek, hedef domaine benzer bizim aldığımız domain'e girebilir. kali tool
+=> urlcrazy -r ankara.edu.tr
+
+-Alexa analizi: => www.alexa.com : domain'ler hakkında istatiksel bilgiler tutan bir servis.
+
+-İş ilanları analizi: bazen araştırılan hedef, kendisi hakkında donanım/yazılım bilgilerini iş ilanlarında paylaşmış olabilir.
+
+-Archive.org analizi: => archive.org : internet sitelerinin eski belgelerinin yer alıyor olabileceği bir servis. bağımsız ve kar amacı gütmüyor.
+
+-Sosyal medya hesaplarının analizi: face'de paylaştığı fotoğraf örnek: bilgisayarın ekran görüntüsü atmış olabilir. kritik bir bilgi elde edebiliriz. (veriden veri üretme) (fotoğraftan parmak izi çıkartan adam örneği)
+
+-Kaynak kod ve geliştirici firma analizi: bir websitesinin kaynak kodları incelenerek bilgi elde edilebilir.
+
+-Çalışanların geliştirici siteleri analizi: hedef kurumdaki çalışanların github hesaplarından bilgi elde edilebilir.
+
+*-Pastebin üzerinden bilgi toplama: => www.pastebin.com : Dump'ların vs. paylaşıldığı bir site. örnek: google => site:pastebin.com intext:"password"
+
+-Finans araştırması: Hedefe göre değişir. 
+
+---Mola 1.5saat---
+
+---Mola 20dk---
+
+---Aktif Bilgi Toplama
+
+-NMAP: hangi zafiyetlere sahip vs. gibi analizler yapan tool. Sürekli istek yapmak bir anomalidir. Karşı taraf bunu fark edip bizi engelleyebilir.
+
+=> ifconfig eth0 (kendi IP'mizi öğreniyoruz)
+
++Ağda bulunan ayakta bulunan bütün cihazların IP'lerini nasıl öğreniriz?
+-=>netdiscover -i eth0 -r 10.0.2.0/24
+-=>nmap -sP 10.0.2.0/24 -vv veya nmap -sP 10.0.2.0-150 -vv
+
+Örnekler:
+-En sık kullanılan 500 port
+=> nmap 10.0.2.7 --top-ports 500
+=> nmap -sV 10.0.2.7 
+
+=> nmap -sS -sV 10.0.2.7 -vv (syn paketi gönderir) synack döndüren portları listeler. (her portu açık gösterirse) 
+=> nmap -sT -sV 10.0.2.7 -vv (açık olan portların versiyon taramasını yapar)
+=> nmap -sT -sV -p80,8000-8100 10.0.2.7 -vv (spesifik olarak bir port veya port aralığını taramak)
+=> nmap -sT -sV -p- 10.0.2.7 -vv (tüm portları tarar)
+=> nmap -sT -sV 10.0.2.7 -O -vv (tüm portları tarar) (işletim sistemi tarar. en az bir açık bir de kapalı porta ihtiyacı var)
+=> nmap -sT -sV 10.0.2.7 -O -vv -T4 -A (belirli süre kalıplarıyla arama yapar, A daha agresifleştirir)
+=> nmap -f -f -sT -sV 10.0.2.7 -O -vv -T4 -A  (firewall varsa nasıl aşarız? paketi parçalara bölerek)
+=> nmap --spoof-mac=IBM (atlatma yollarından biri, kendimizi IBM olarak gösteriyoruz)
+=> nmap -D 192.168.1.1,192.168.1.2,10.0.2.7,192.168.1.3 (paketleri 4'e böldük ve 4 tane IP'den gönderilmiş olarak gösterip araya kendimizi de sıkıştırdık. sızma yöntemi)
+
+-Scriptler(NSE):
+
+=> ls /usr/share/nmap/scripts/ (scriptleri listeler)
+
+=> nmap -sT -sV -p 25 --script=ftp-vsftpd-backdoor.nse 10.0.2.7 (çalışmadı)
+
+-Direk ack paketi yollayıp cevap alırsak firewall yok demektir.
+
+@sC = script kullanımını sağlayan parametre
+@f = gönderdiğimiz paketleri parçalar ve gönderildiği yerde birleşirler bu sayede güvenlik sistemi atlatılabilir.
+@top-ports value = en sık kullanılan portları tarar
+@system-dns = işletim sisteminin DNS servisini kullanır.
+@sS = syn paketi yollar
+@sA = ack paketi yollar
+@sT = bağlanma komutu
+@sV = port durumunu öğren
+@v = verbose (gereksiz detayları gösterme)
+@vv = more verbose
+@T<0-5> = zaman şablonlarıyla tarama yapar. değer yükseldikçe daha hızlı tarar ama yavaş tarama daha sağlıklı sonuç verir.
+@A = Enable OS detection, version detection, script scanning, and traceroute (daha derin tarama)
+
+-TOR: bizi mass networke sokar ve ip adresimizi bu nested network'deki başka birinin ip adresini alarak çıkarıp ulaşmak istediğimiz yere ulaştırır. bunun riski bir başkası da bizim ip'mizi alarak başkasına saldırabilir ve saldıran olarak bizim IP'miz görünür.
+
+-Örnek kendini gizleme: saldırgan=>vpn=>vpn=>TOR=>vpn=>Kurban (hız pert, gizlilik OP)
+
+=> cat /etc/proxychains.conf 
+
+# tor
+# proxychains
+# nmap
+
+=> proxychains nmap 10.0.2.7 (tor'dan bir IP alarak nmap ile scan yapar)
+=> tor (tor servisini başlatır)
+=> firefox(advanced settings => network => settings => manuel proxy => socksv_4 host: 12.0.0.1 port:9050)
+=> proxychains firefox (firefox'u tor'da açar) (bunu yaptıktan sonra IP'ni kontrol et)
+
+-unicornscan:
+
+=> syntax = unicornscan IP:port
+=> unicornscan 10.0.2.7:25 (25.portu tara)
+
+---Mola 15dk---
+
+---Tekrar---
+
+-nmap bize rapor üretebiliyor. 
+
+=> nmap 10.0.2.4 -oA xp
+
+---Mola 1.5saat---
+
+-çalışmalar: üni. hakkında bilgi toplama
+
+*******************************************************************************
+
+---09-08-2016(4.gün)
+
+---DNS üzerinden bilgi toplama:
+-DNS eğer bilmeyip bilgiyi başka dns sunucularından getirmeye çalışıyorsa buna recursive denir. DNS sunucusuna recursive olmayan sorgular gönderdiğimizde DNS sunucusunun cache'inde bu bilgi varsa geri döner, yoksa cevap gelmez. Bu sayede o DNS sunucusunda istediğimiz bilginin daha önce istenip istenmediğini öğrenebiliriz. Yani birisi bulmak istediğimiz siteye daha önce girmiş mi sorusunun cevabını alabiliriz.
+
+-cache bilgileri sonsuza kadar saklamaz. belli bir süre sonra DNS sunucusu bilgileri kendisi tekrar almak için gider. bunun bilgisine de şuradan ulaşılabilir:
+
+=> dig www.ibu.edu.tr 
+= www.ibu.edu.tr.	///saniye (6673)	IN	A	194.27.225.124
+
+-scapy ile çalışırken DNS(rd=1) değerini rd=0 ile değiştirirsek paket non-recursive olur.
+-dig için recurse parametresi ile bu ayar yapılabilir.
+
+-DNS üzerinden toplanabilecek bilgiler:
+SOA kaydına bakılarak e-mail adresi alınabilir.
+Zone Transfer yapılabilir.
+Brute Force yapılabilir.
+
+-SOA kaydı sorgulama:
+=> nslookup -type=SOA ibu.edu.tr || dig SOA ibu.edu.tr
+
+-DNS sunucusunu öğrenme:
+=> nslookup -type=NS ibu.edu.tr || dig NS ibu.edu.tr
+
+-Eğer istediğimiz bir DNS'ten sorgulatmak istiyorsak bunu da ayrıyetten belirtmemiz gerekiyor => server 8.8.8.8
+
+-fierce default wordlist => /usr/share/fierce/hosts.txt
+
+///scapy ödevi
+
+-Hazır Örnek: 
+answer=sr1(IP(dst="8.8.8.8")/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname="www.thepacketgeek.com")),verbose=0)
+
+-Deneme:
+subdegisken=["obs", "demo", "login"]
+for i in subdegisken:
+	send(IP(dst="8.8.8.8")/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname="www."+subdegisken[i]+"trakya.edu.tr"))
+
+
+
+-Çözüm:
+=> python
+=> from scapy.all import *
+=> for i in open(*/tmp/sozluk.txt"):
+=> 	answer=sr1(IP(dst="8.8.8.8")/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname=i.rstrip('\n')+".ibu.edu.tr")),verbose=0)
+	answer[DNS].an
+	-enter-
+	-enter-
+
+---Zone Transfer:
+-ilk etapta yapmamız gereken şey hedefle ilgili sorumlu dns sunucularını bulmak
+
+-bu yöntem maksimum kapsamı tespit edebilmek için kullanılır.
+
+=> dig ns ibu.edu.tr
+=> dig axfr ibu.edu.tr @ns2.ibu.edu.tr (başarılı olana kadar bütün dns sunucularını dene)
+
+-çalışan örnek
+
+=> dig zonetransfer.me NS
+=> dig axfr zonetransfer.me @nsztm2.digi.ninja (dns2)
+=> dig axfr zonetransfer.me @nsztm1.digi.ninja (dns1)
+
+---Mola 1.5saat
+
+---Mail üzerinden bilgi toplama:
+
+-Mail header arasından bilgi toplanabilir. Bir e-mail grubuna e-mail yollandığında eğer o gruptan mail'i alamayacak bir kişi varsa, e-mail servisi bize bu kişinin yolladığımız e-maili alamayacağının bilgisini verirken kişiyi ifşa etmiş oluruz. 
+
+-Kaynak header'e ulaşmak => gmail'e gir. mail'i aç. sağ üstteki reply'ın yanındaki oka bas. Show original'i seç.
+
+-Kaynak header'in analizi için => http://mxtoolbox.com/EmailHeaders.aspx
+
+-Örnek:
+=> dig ns barkin.info (dns sunucusunu öğreniyoruz)
+=> dig ns barkin.info @ns1.cloudns.net (e-posta'yı öğreniyoruz)
+=> nc eposta.kilic.xyz 25 -v
+
+-ehlo localhost (valar morghulis)
+
+---21:15
+
+---nmap'in 2 özelliği daha var:
+
+-1 tarama yapma esnasında tarayan kişi kendisini gizleyebilmek için kullanılabilecek yöntemler:
+
+---1a: Decoy Scan: sahte IP'lerden paket üreterek kalabalık yaratıyorsunuz. kalabalığın arasına 1 ya da 2 kendi IP'mizi ekleyince bizim yolladığımız paketler göze batmayacak şekilde kalıyor. 
+
+---1b: IDLE Scan: gerekenler: saldırgan, hedef, kurban(zombi). uygulayabilmek için 2 şart var. bir: bulacağınız kurbanın network trafiğinin az olması lazım. güzel kurbanlar: boşta olan makineleler. iki:  
+
+-hikaye: kurbana paket gönderilir. kurban geri cevap verir. kurbana bu sefer hedeften gidiyormuş gibi bir paket daha gönderilir. kurban geri cevabını hedefe döner. hedefte kurbana eğer port kapalı veya arada firewall varsa reset+ack döner. bu sefer kendimizden kurbana paket yollarız (x+1). bize cevabı döner. Bu sayede hedef portun kapalı olup olmadığını veya arada firewall olup olmadığını öğrenebilme imkanımız olabilir. Bize dönen cevap x+1 ise port kapalı/firewall, x+2 ise port açık demektir.
+
+****************************************************************************
+
+---10/08/2016--- 10.22
+
+---Routing: networkler arası bağlantının sağlanabilmesi için gönderilecek paketlerin  gönderilmesi işi için aracılık yapılması.
+
+-Şema: A -|- B => | = router
+
+-Üç makine (ortadaki router olarak çalışan linux) uygulaması.
+
+=> arp -a (arp tablosunu görüntülemek için)
+=> route (routing tablosu)
+=> route add -net 10.0.1.0/24 gw 10.0.2.1 (subnet'inde olmayan bir yere gitmeye çalışan makineye nasıl gideceğini söylememiz gerekiyor. bu komut ile söylüyoruz.)
+=> echo 1 > /proc/sys/net/ipv4/ip_forward (aynı işlem karşı taraf için de yapılmamışsa işlem yapılan taraf paketi yollayabilir ama route işlemi yapılmamış taraf cevap gönderemez. route tablosu eklendikten sonra yönlendiriciyi de açmamız gerekir.)
+=> route add -net 10.0.2.0/24 gw 10.0.1.1 (yönlendiriciye de nasıl gideceğini route add ile göstermemiz gerekiyor.)
+
+---NAT:
+
+=> iptables -t nat -L -vn (tabloyu gösterir)
+=> iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE 
+
+-Firewall: firewall dediğimiz şey sadece hangi paketin hangi portlara gidip gidemeyeceğine karar verir. yerine gidemeyen paketler düşer. sistemde olmaması gereken bir bozukluk tespit edilerek atlatılır. 
+
+---Gateway:
+
+-Hiçbir şeyi bilmediğiniz, geri kalan her şey için yönlendirilmenizin yapıldığı yer. Örnek: fransızca bilmiyorsun. fransızca bilen tercüman kullanıyorsun. o tercüman işte gateway.
+
+--------------
+
+---DNS: ip'yi domain'e, domain'i ip'ye çeviren servistir. 
+
+-reverse who.is => IP ile sorgulattığımızda sınır içerisinde başka hedefler de elde etme ihtimalimiz vardır. o yüzden dns sorgusu yaptığında, reverse dns de yap.
+
+
+
+------------
+
+---Cloudflare By pass: Site DNS sunucularını cloudflare'a teslim edip onun süzgeçten geçirdiği trafiği alıyor. 
+
+-amap. internetin tamamını tarar. 
+
+-------------
+
+---ARP: her makinenin arp tablosu vardır. ip adresi broadcast yapılır. kime aitse onun MAC adresi öğrenilir. 2.katmanda çalışır. makinelerin aynı subnet'de olması gerek.
+
++Crosscable ile bağlı ama farklı subnet'deki iki makine birbirleriyle nasıl iletişim kurar?
+-ARP ile. Aynı subnet'de olmayan makineler ARP ile iletişim kuramaz ancak gidilmek istenen IP'ye nasıl gidileceğini route add ile gösterirsek ağa ulaşacaktır.
+
+-ARP'ın herhangi bir doğrulama kabiliyeti yoktur. Yerel ağdaki makineleri keşfetmek için ARP protokolü kullanılabilir.
+
++Neden ICMP değil de ARP ile bilgi topluyoruz?
+-Eğer ping engellenmişse ICMP ile hedef açık olsa bile kapalı gibi görürüz. ARP'ta böyle bir şey söz konusu değildir.
+
+-Örnek ARP keşfi: 
+=> iptables -t filter -L -vn
+=> nc 192.168.0.2 22 -v
+=> arping 192.168.0.2 
+=> (ağı izleme) tcpdump -i eth0 -nnv arp
+=> arp-scan -l -I eth0 (yerel ağdaki bütün makineleri tarayarak sonuç alma işlemi yapar)
+
+-Ödev: scapy ile arp taraması yap.
