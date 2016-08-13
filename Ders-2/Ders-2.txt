@@ -1,0 +1,30 @@
+
+
+
+-Gateway: kargo firmaları örneği. Nasıl gideceğinizi bilmediğiniz yerlere verilerinizi gönderebilmeniz için aracılık yapan router'lara gateway denir.
+
+tcpdump = emektar wireshark
+
+---ETÜT: scapy ile
+
+-dns isteği oluşturup dns sunucusuna yollayıp wireshark ile izle.
+-dhcp isteği oluşturup dhcp servisine gönder. eduroam'a yollayabiliriz.
+
+
+-dns paketi
+
+ip=IP(dest="8.8.8.8")
+udp=UDP(dport=53)
+dns=DNS(rd=1,qd=DNSQR(qname="www.facebook.com"))
+dns_pack=ip/udp/dns
+send(dns_pack)
+
+-dhcp paketi
+
+ip_d=IP(src="0.0.0.0", dst="255.255.255.255")
+udp_d=UDP(sport=68, dport=67)
+dhcp=DHCP(options=[("lease_time", 70000)])
+dhcp_pack=ip_d/udp_d/dhcp
+send(dhcp_pack)
+
+***************************************************************************

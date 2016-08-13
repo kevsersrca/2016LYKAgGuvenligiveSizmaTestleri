@@ -1,0 +1,157 @@
+
+---08-08-2016
+
+---Recon (Bilgi Toplama)
+
+---Pasif Bilgi Toplama (OSINT) (Açık Kaynak İstihbaratı): 
+-Senaryo: Black Box pen.test isteniyor:
+-Yapacağımız ilk iş: verilen adresin IP'sini öğrenme yöntemleri 
+=> ping ankara.edu.tr
+=> nslookup
+server 8.8.8.8
+www.ankara.edu.tr
+
+ICANN = bütün dünyadaki ip adreslerinin dağıtılması hakkında arama yapılabilir. 
+RIPE = avrupadaki ip adreslerini aratabileceğimiz yer.
+-www.ankara.edu.tr için elde ettiğimiz ip adresini ripe içerisinde aratıyoruz. elde ettiğimiz net-name'yi tekrar ripe'de aratarak başka bilgilere de ulaşabiliriz.
+
+=> who.is ankara.edu.tr (tr uzantılarda çalışmıyor?)
+=> ipinfo.io (arama servisi)
+=> fierce -dns ankara.edu.tr
+
+-Saldırmadan önce bulabildiğimiz her şeyi toplamaya çalışacağız.
+
+-Subdomain tespiti: google üzerinden => site:*.ankara.edu.tr şeklinde arama yaparsak subdomainlere ulaşabiliriz.
+
+-Hedefe ait virtualhost'ların tespiti: => bing.com arama motorundan ip:x.y.z.a şeklinde arama yaptığımızda virtualhost'lara ulaşabiliriz.
+
+-Hedefe ait e-mailler: => theharvester -d ankara.edu.tr -b bing
+
+-Cloudflare: websitelerine ip değiştirme, bilgileri gizleme, ddos savunmaları gibi hizmetler veriyor. www.osman.com bu adresi cloudflare koruyor. ama subdomainler açıkta kalır.
+
+-Hedefe ait indirilebilir dosyalar: => google => filetype:pdf ankara.edu.tr
+*-2.yöntem = FOCA
+-3.yöntem(stabil değil) = metagoofil
+
+-Lokasyon tespiti: ipinfo.io, ip2location.com, whois.domaintools.com (IP adresini aratarak)
+
+-Reverse whois: IP veriyoruz. bu IP'ye ait bilgilere ulaşıyoruz. siteler: whois.com (sansürlü, güncel), viewdns.info (sansürsüz, eski)
+
+-Netcraft: www.netcraft.com hedefin kullandığı işletim sistemini öğrenebiliriz. Örnek: eğer eski bir apache serveri kullanılıyorsa versiyonuna ait bazı zafiyetlere sahip olabilir. Bu zafiyetler kullanılabilir. Veya => http://whois.domaintools.com/ sitesinden de öğrenilebilir.
+
+-Shodan: www.shodan.io => bilgi toplamak için gelişmiş bir arama motoru. parametreler: hostname:ankara.edu.tr, country:tr alternatif siteler: zoomeye, censys.io(lokasyon + port bilgisi de var)
+
+---Mola 15dk---
+
+-FOCA: hedefe ait indirilebilir bütün veya bazı dosyaları düzenli bir şekilde indirip analiz edebilmemizi sağlayan tool. Metadata analizleri sayesinde bir çok bilgi elde edilebilir. 
+
+-Robtex: www.robtex.com => istenen sitenin network'ünü şema halinde gösteren servis.
+
+-Google üzerinden keşif işlemleri: google filtreleri hakkında detaylı bilgiler=> https://www.exploit-db.com/google-hacking-database/ örnek: site:*.ankara.edu.tr
+
+-Hedefe ait giriş panellerinin tespiti: google filtreleriyle bulunabilir. inurl:login site:*.ankara.edu.tr
+
+-Dump: kötü niyetli kişiler tarafından bir database'in patlatılarak bilgilerin internette herkese açık olarak yayınlanması.
+
+-Hedef domaine benzer domainlerin tespiti: kullanıcı yazım hatası yapıp fark etmeyerek, hedef domaine benzer bizim aldığımız domain'e girebilir. kali tool
+=> urlcrazy -r ankara.edu.tr
+
+-Alexa analizi: => www.alexa.com : domain'ler hakkında istatiksel bilgiler tutan bir servis.
+
+-İş ilanları analizi: bazen araştırılan hedef, kendisi hakkında donanım/yazılım bilgilerini iş ilanlarında paylaşmış olabilir.
+
+-Archive.org analizi: => archive.org : internet sitelerinin eski belgelerinin yer alıyor olabileceği bir servis. bağımsız ve kar amacı gütmüyor.
+
+-Sosyal medya hesaplarının analizi: face'de paylaştığı fotoğraf örnek: bilgisayarın ekran görüntüsü atmış olabilir. kritik bir bilgi elde edebiliriz. (veriden veri üretme) (fotoğraftan parmak izi çıkartan adam örneği)
+
+-Kaynak kod ve geliştirici firma analizi: bir websitesinin kaynak kodları incelenerek bilgi elde edilebilir.
+
+-Çalışanların geliştirici siteleri analizi: hedef kurumdaki çalışanların github hesaplarından bilgi elde edilebilir.
+
+*-Pastebin üzerinden bilgi toplama: => www.pastebin.com : Dump'ların vs. paylaşıldığı bir site. örnek: google => site:pastebin.com intext:"password"
+
+-Finans araştırması: Hedefe göre değişir. 
+
+---Mola 1.5saat---
+
+---Mola 20dk---
+
+---Aktif Bilgi Toplama
+
+-NMAP: hangi zafiyetlere sahip vs. gibi analizler yapan tool. Sürekli istek yapmak bir anomalidir. Karşı taraf bunu fark edip bizi engelleyebilir.
+
+=> ifconfig eth0 (kendi IP'mizi öğreniyoruz)
+
++Ağda bulunan ayakta bulunan bütün cihazların IP'lerini nasıl öğreniriz?
+-=>netdiscover -i eth0 -r 10.0.2.0/24
+-=>nmap -sP 10.0.2.0/24 -vv veya nmap -sP 10.0.2.0-150 -vv
+
+Örnekler:
+-En sık kullanılan 500 port
+=> nmap 10.0.2.7 --top-ports 500
+=> nmap -sV 10.0.2.7 
+
+=> nmap -sS -sV 10.0.2.7 -vv (syn paketi gönderir) synack döndüren portları listeler. (her portu açık gösterirse) 
+=> nmap -sT -sV 10.0.2.7 -vv (açık olan portların versiyon taramasını yapar)
+=> nmap -sT -sV -p80,8000-8100 10.0.2.7 -vv (spesifik olarak bir port veya port aralığını taramak)
+=> nmap -sT -sV -p- 10.0.2.7 -vv (tüm portları tarar)
+=> nmap -sT -sV 10.0.2.7 -O -vv (tüm portları tarar) (işletim sistemi tarar. en az bir açık bir de kapalı porta ihtiyacı var)
+=> nmap -sT -sV 10.0.2.7 -O -vv -T4 -A (belirli süre kalıplarıyla arama yapar, A daha agresifleştirir)
+=> nmap -f -f -sT -sV 10.0.2.7 -O -vv -T4 -A  (firewall varsa nasıl aşarız? paketi parçalara bölerek)
+=> nmap --spoof-mac=IBM (atlatma yollarından biri, kendimizi IBM olarak gösteriyoruz)
+=> nmap -D 192.168.1.1,192.168.1.2,10.0.2.7,192.168.1.3 (paketleri 4'e böldük ve 4 tane IP'den gönderilmiş olarak gösterip araya kendimizi de sıkıştırdık. sızma yöntemi)
+
+-Scriptler(NSE):
+
+=> ls /usr/share/nmap/scripts/ (scriptleri listeler)
+
+=> nmap -sT -sV -p 25 --script=ftp-vsftpd-backdoor.nse 10.0.2.7 (çalışmadı)
+
+-Direk ack paketi yollayıp cevap alırsak firewall yok demektir.
+
+@sC = script kullanımını sağlayan parametre
+@f = gönderdiğimiz paketleri parçalar ve gönderildiği yerde birleşirler bu sayede güvenlik sistemi atlatılabilir.
+@top-ports value = en sık kullanılan portları tarar
+@system-dns = işletim sisteminin DNS servisini kullanır.
+@sS = syn paketi yollar
+@sA = ack paketi yollar
+@sT = bağlanma komutu
+@sV = port durumunu öğren
+@v = verbose (gereksiz detayları gösterme)
+@vv = more verbose
+@T<0-5> = zaman şablonlarıyla tarama yapar. değer yükseldikçe daha hızlı tarar ama yavaş tarama daha sağlıklı sonuç verir.
+@A = Enable OS detection, version detection, script scanning, and traceroute (daha derin tarama)
+
+-TOR: bizi mass networke sokar ve ip adresimizi bu nested network'deki başka birinin ip adresini alarak çıkarıp ulaşmak istediğimiz yere ulaştırır. bunun riski bir başkası da bizim ip'mizi alarak başkasına saldırabilir ve saldıran olarak bizim IP'miz görünür.
+
+-Örnek kendini gizleme: saldırgan=>vpn=>vpn=>TOR=>vpn=>Kurban (hız pert, gizlilik OP)
+
+=> cat /etc/proxychains.conf 
+
+# tor
+# proxychains
+# nmap
+
+=> proxychains nmap 10.0.2.7 (tor'dan bir IP alarak nmap ile scan yapar)
+=> tor (tor servisini başlatır)
+=> firefox(advanced settings => network => settings => manuel proxy => socksv_4 host: 12.0.0.1 port:9050)
+=> proxychains firefox (firefox'u tor'da açar) (bunu yaptıktan sonra IP'ni kontrol et)
+
+-unicornscan:
+
+=> syntax = unicornscan IP:port
+=> unicornscan 10.0.2.7:25 (25.portu tara)
+
+---Mola 15dk---
+
+---Tekrar---
+
+-nmap bize rapor üretebiliyor. 
+
+=> nmap 10.0.2.4 -oA xp
+
+---Mola 1.5saat---
+
+-çalışmalar: üni. hakkında bilgi toplama
+
+*******************************************************************************
