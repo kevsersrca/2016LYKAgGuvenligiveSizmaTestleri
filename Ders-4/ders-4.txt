@@ -53,13 +53,13 @@ for i in subdegisken:
 -bu yöntem maksimum kapsamı tespit edebilmek için kullanılır.
 
 => dig ns ibu.edu.tr
-=> dig axfr ibu.edu.tr @ns2.ibu.edu.tr (başarılı olana kadar bütün dns sunucularını dene)
+=> dig axfr ns2.ibu.edu.tr @ibu.edu.tr (başarılı olana kadar bütün dns sunucularını dene)
 
 -çalışan örnek
 
 => dig zonetransfer.me NS
-=> dig axfr zonetransfer.me @nsztm2.digi.ninja (dns2)
-=> dig axfr zonetransfer.me @nsztm1.digi.ninja (dns1)
+=> dig axfr nsztm2.digi.ninja @zonetransfer.me (dns2)
+=> dig axfr nsztm1.digi.ninja @zonetransfer.me (dns1)
 
 ---Mola 1.5saat
 
