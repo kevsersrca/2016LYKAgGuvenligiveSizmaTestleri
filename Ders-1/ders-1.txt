@@ -8,7 +8,7 @@
 - Müşteri günün sonunda zafiyetlerinin raporlanmasını bekler. Ayrıca bir saldırgan için tek bir zafiyet yeterli olabilir ancak pen. tester sistemi tamamen taramalıdır.
 - Her sızma testi sonucunda ortaya illa çok kritik zafiyatlar çıkacak diye bir kural yok. Bu pen. tester için işin handikapıdır.
 - Bazen istemciler e-mail yolladıkları zaman, e-maili yollayan makinenin lokal IP adresini de, e-maili yollayan hakkındaki bilgiler kısmına eklerler. 
-Domain kontrol(Windows tarafı): Windows makinaları bir katalog üzerinden politika bazlı tek bir noktadan yönetmek için kullanılan teknoloji.
+Active Directory : Windows makinaları bir katalog üzerinden politika bazlı tek bir noktadan yönetmek için kullanılan teknoloji. Bu işlem Domain Controller tarafından yapılır.
 
 -----Moladan sonra------- 
 
@@ -49,6 +49,8 @@ Her zafiyet 1-5 arasında derecelendirilir. Bu derecelendirme zafiyetin size ola
 4a-Hacking: Bir sistemi doğası dışında çalıştırabilme kabiliyetine hacking denir.
 4b-Ethical Hacking: Tespit edilen zafiyetin sistemi geliştirmek için kullanılmasına Ethical Hacking denir.
 
+etichal_hacking(pen_test(vuln_assessment(),sec_audit()))
+
 ---Penetrasyon Testi Türleri
 
 1)Network Pen. Test
@@ -82,7 +84,7 @@ Her zafiyet 1-5 arasında derecelendirilir. Bu derecelendirme zafiyetin size ola
 
 2- Hedef organizasyonun zafiyetlerin (açık olan girdi noktalarını dinleyen portların vs.) tespit edildiği bölüm.
 
-3- Hack işleminin yapıldığı bölüm.
+3- Zafiyetleri sömürerek gidilebilecek en uç noktaya gidilmesi işlemi.
 4- Kendinizi kalıcı kılmak için sistemde bir erişim noktası oluşturduğunuz bölüm. Bu aşamanın dahil edildiği örnek senaryo: kurum hali hazırda güvenlik için bir takıma sahiptir.(Blue Team). Bu takıma haber vermeden sizin saldırmanızı ister (Red Team) ve Blue Team'ın nasıl tepki vereceğini görmek ister.
 5- Yaptığımız işlemlerin izlerini temizlediğimiz bölüm.  
 7- Dos ve DDos sistemi aşırı yükleyerek yıkmak ister. Loadtest ise belli senaryolarda sistemin maksimum kapasitesini belirlemek için uygulanır.
@@ -99,9 +101,12 @@ OSInt(Open Source Intelligence): Hani instagram'da eski sevgilisini yeni sevgili
 -İzlenilecek olan yöntemleri belirli bir standarta oturtmak için oluşturulmuş tanımlama sistemi.
 
 1)OSSTMM
-2)Nist(National Institute of Standards)
-3)OWASP
+2)Nist 800-115(National Institute of Standards)
+3)OWASP testing guide
 4)Penetration Testing Framework
+5)ISSAF (Information System Security Assessment Framework)
+6)PTES (Penetration Testing Execution Standart)
+7)PCI(Payment Card Industry) Penetration Testing Guide
 
 +Scope(kapsam) nasıl belirlenir?
 -Test yapılacak hedef hakkında bazı bilgiler öğrenildikten sonra çalışılan ortam, sistemin türleri, kullanılan teknolojiler öğrenilip belli bir profil çıkartılır. (Blog, e-ticaret sitesi, banka sitesi).Scope'da bu profile göre çizilir.
@@ -147,7 +152,7 @@ Not3: Testler tek seferlik değil, belli süre aralığında tekrar tekrar yapı
 1)Physical ""(Fiziksel Katman)
 
 1-Elektrik akımlarını 1 ve 0 olarak yorumlar.
-2-Veriyi nasıl transfer edeceğinizi yorumlayan katman. (MAC)
+2-Veriyi nasıl transfer edeceğinizi yorumlayan katman. (MAC)(ARP,RARP)
 3-Adresleme işleminin yapıldığı katman. (IP)
 4-Paketlerin gönderilip alındığı katman. (TCP/UDP)
 5-Bağlantıdaki oturumların takibinin yapıldığı katman.
@@ -172,8 +177,15 @@ IPV4: 192.168.1.1 => IIIIIIII.IIIIIIII.IIIIIIII.IIIIIIII (10'luk sistemdeki say�
 
 Alt ağ maskesi: 2lik sayı sisteminde belli bir noktanın solu tamamen 1, sağı tamamen 0 yapılır. 10luk sisteme geri döndürüldüğünde elde ettiğimiz sayı alt ağ maskesidir. 1'lenen kısım Network IP'sine, 0'lanan kısım Broadcast IP'sine eşittir.
 
-192.168.10.0 sorusu ödev
+SORU:
+192.168.10.0/24 ip adresinin bir makinaya verilebilmesi için subnet mask ne olmalıdır?
 
 192.168.10.0 => 11000000.10101000.00001010.00000000
+Normalde(Subnet mask)                     ^
+1 sola kaydırırsak:                      ^           hala network ip'sidir makinaya verilemez.
+2 sola kaydırırsak:                     ^            sağ tarafta bir tane 1 olduğu için artık bu ip'yi bir makinaya verebiliriz.
+
+192.168.10.255/24 IP'sini bir makinaya verebilmek için ise bir kere sola kaydırmak yeterli.
+
 
 *********************************************************************
