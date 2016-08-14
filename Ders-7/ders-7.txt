@@ -1,0 +1,60 @@
+---13/08/2016---
+
+---SNMP (Simple Network Management Protocol): 
+
+-SNMP, UDP Protokolü ile çalışır. 161 portunu kullanır.
+
+-MIB/OID : Ağın dallara ayrılarak hangi dalın kaçıncı MIB'i şeklinde bir sorguya dönen bilgiler OID diye geçer. Bu bilgilerle MIB içerisinde konumunu bildiğimiz bir makinenin OID bilgilerine ulaşabiliriz.
+
+-MIB sayılarla ifade edilir. Alt dallara geçmek için araya nokta konur. Örnek: .1.3.6
+
+-Community String: SNMP paketi içerisinde yer alan bir bilgidir. SNMP paketi içerisinde yer alan community string'ler: Public(read only), private(write). Community string ele geçirilerek bu yetkiler elde edilebilir.
+
+-Üç versiyon vardır. V1 ve V2 Community String üzerinden gider. V3 ise username-password'da kullanır.
+
+=> snmpwalk -v 1 -c public 192.168.0.39 .1.3.6.1.2.1.2.2
+
+-İnternette "linux system oid's" şeklinde arama yapılarak OID örneklerine ulaşılabilir.
+
+---Ödev: 192.168.0.39'dan SNMP ile bilgi topla:
+
+=> snmpwalk -v 1 -c public 192.168.0.39 .1.3.6.1.2.1.2.2
+
+-Scapy ile:
+
+=> scapy
+-p=IP(dst="192.168.0.39")/UDP(sport=161,dport=161)/SNMP(community="public",PDU=SNMPget(varbindlist=[SNMPvarbind(oid=ASN1_OID("1.3.6.1.4.1.9.2.1.55.192.168.2.100"),value="192.168.0.39.config")]))
+-send(p)
+-Trafiği izlemek için wireshark filtresi : snmp
+
+*NOT*: scapy yöntemi tam çalışmıyor, bazı parametreler eksik. internetten araştır. 
+
+-NMAP ile: => nmap -p161 -T5 -sU --script=snmp-*.nse 192.168.0.39 -vv
+
+---Mola 15dk---
+
+---Zafiyet Tespitleri:
+
+-Tools: nessus, openvas(open-source)
+
+=> /etc/init.d/nessusd start (nessus'u başlatır)
+=> netstat -lntup (8834 port'unun ayakta olup olmadığını kontrol ederek nessus'un çalışıp çalışmadığını kontrol edebiliriz)
+
+=> https://localhost:8834/ adresinden Nessus'a girebiliriz.
+
+--- Nessus Kullanımı:
+
+-Politika (Policy): Taramalar için politikaların oluşturulduğu kısımdır. Politikayı kendimiz oluşturabilmek için Advanced Scan'ı seçmemiz gerekir.
+-Tarama (Scan): Hedeflerin belirlendiği ve taramanın başlatıldığı kısımdır.
+
+-Nessus'un kurulu olduğu dizin => /opt/nessus/
+
+---Mola 1.5saat---
+
+-Nessus Remediations: Basit çözüm önerilerinin bulunduğu sekme.
+
+-Nessus Vuln.s/Vuln. Info: Bulunan zafiyetle ilgili exploit bilgilerinin bulunduğu kısım.
+
+---OpenVAS: https://localhost:9392/ => username: admin (şifreyi kurulum bittiğinde terminal'de veriyor.)
+
+-Tool'lar zafiyetleri her ne kadar güzelce raporlasada, rapordaki zafiyetleri tek tek incelemek gerek. Info olarak gösterilen bir zafiyet aslında kritik olabilir. 
