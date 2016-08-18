@@ -33,7 +33,7 @@
 -Airodump menüsü iki bölüme ayrılır. İlk bölüm AP(erişim noktaları) ile alakalı olan bölümdür. İkinci bölüm erişim noktalarıyla alakalı istemciler ile ilgili olan bölümdür.
 -PWD: Erişim noktasının sinyal gücü hakkında bilgi verir. - değer alır, değer yüksekse erişim daha güçlüdür.
 
--Wireless "full dublex(?)" teknolojisini hala desteklememektedir. (Aynı anda hem veri yollayıp veri alma)
+-Wireless "full duplex" teknolojisini hala desteklememektedir. (Aynı anda hem veri yollayıp veri alma)
 
 -Beacons: Wireless'daki kontrol paketlerinin sayısını belirten kısım.
 -Data: Bilgi alış-verişinin yapıldığı paket sayısı.
