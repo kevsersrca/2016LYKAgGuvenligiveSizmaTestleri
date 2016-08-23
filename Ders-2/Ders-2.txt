@@ -91,8 +91,6 @@ sendp(paket)
 
 Not: Eğer layer 3 paket gönderilecekse send metodu kullanılması gerek. eğer layer 2 paket gönderilecekse sendp metodu kullanılır.
 
-kendime not: yurda dönünce root ile wireshark'dan dinlemeyi tekrar dene
-
 ---TCP: (3way handshake) Bir bilgisayarla haberleşmek istediğiniz zaman bu haberleşme isteğini karşı tarafa bildirilip karşı taraftan da onay alırsa iletişimin kurulduğu ve bu iletişimin sonlandırılana kadar geçer zaman içerisinde herhang bir kayıp veya sorun yaşanmamasını garanti etmeye çalışan protokoldür.
 
 ---Port: Bir makinenin üzerinde kendinden başka makinelerin ulaşabilmesi için açılan bir kapı olarak düşünülebilir. Birden fazla servise erişmek için bu kapılardan hangisi uygunsa oradan girip ordan konuşmaya sağlayan açık kapılardır. Kaç port vardır? 2^16 (Source-Port 16bit olduğu için)
@@ -110,9 +108,6 @@ B => syn + ack(x+1) + y(sequence)
 A => ack(y+1) + z(sequence)
 
 nc 127.0.0.1 22 -v
-
-kendime not: wireshark root olmadan düzgün çalışmıyor. kaydettiğin dosyaları root'a aktarıp root ile devam et.
-kendime cevap: root ile de çalışmıyor.
 
 -scapy üzerinden örnek:
 
