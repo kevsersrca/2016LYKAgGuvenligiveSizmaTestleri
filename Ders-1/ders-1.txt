@@ -1,6 +1,6 @@
 06/08/2016 1.Gün
 ---Sızma testi nedir?
-- Bir saldırgan profilinin en yakın haliyle sistemin zafiyatlarını tespit edip risk haritasını çıkararak çözüm önerilerinde bulunulması hizmeti.
+- Bir saldırgan profilinin en yakın haliyle sistemin zafiyetlerini tespit edip, bu zafiyetlerin risk haritasını çıkararak çözüm önerilerinde bulunulması hizmetine sızma testi denir.
 - Bir saldırgan ile bir pen. tester arasında üç temel fark vardır. Bunlar: kapsam, motivasyon ve zamandır.
 - Saldırgan herhangi bir kapsam(sınır) tanımazken pen. tester hedef ile anlaştığı kapsamlar içerisinde çalışır. 
 - Her ikisinin de motivasyonları farklıdır. 
