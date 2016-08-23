@@ -1,0 +1,133 @@
+06/08/2016 1.Gün
+---Sızma testi nedir?
+- Bir saldırgan profilinin en yakın haliyle sistemin zafiyetlerini tespit edip, bu zafiyetlerin risk haritasını çıkararak çözüm önerilerinde bulunulması hizmetine sızma testi denir.
+- Bir saldırgan ile bir pen. tester arasında üç temel fark vardır. Bunlar: kapsam, motivasyon ve zamandır.
+- Saldırgan herhangi bir kapsam(sınır) tanımazken pen. tester hedef ile anlaştığı kapsamlar içerisinde çalışır. 
+- Her ikisinin de motivasyonları farklıdır. 
+- Saldırgan zaman konusunda sıkıntı yaşamaz. Pen. tester ise belirli bir süre içerisinde vereceği hizmeti tamamlar. Bu zaman dilimini müşteri ve pen. tester ortak belirler.
+- Müşteri günün sonunda zafiyetlerinin raporlanmasını bekler. Ayrıca bir saldırgan için tek bir zafiyet yeterli olabilir ancak pen. tester sistemi tamamen taramalıdır.
+- Her sızma testi sonucunda ortaya illa çok kritik zafiyatlar çıkacak diye bir kural yok. Bu pen. tester için işin handikapıdır.
+- Bazen istemciler e-mail yolladıkları zaman, e-maili yollayan makinenin lokal IP adresini de, e-maili yollayan hakkındaki bilgiler kısmına eklerler. 
+Active Directory : Windows makinaları bir katalog üzerinden politika bazlı tek bir noktadan yönetmek için kullanılan teknoloji. Bu işlem Domain Controller tarafından yapılır.
+
+---Sızma Testi Çeşitleri
+
+1)Black Box
+2)White Box
+3)Gray Box
+
+-Black Box: Test edilen kurumun size hiçbir bilgi vermediği test türüdür. Kapsam size aittir. Dışarıdan bir saldırganın verebileceği hasar simüle edilir.
+-White Box: Kurumun bize gerekli bilgileri sağladığı test türüdür. Yüksek yetkilere sahip birisinin verebileceği hasar simüle edilir.
+-Gray Box: White Box ve Black Box arası bir test türüdür. Bazı bilgiler verilir. Black Box'a kıyasla maliyet azalır. Düşük yetkilere sahip birisinin verebileceği hasar simüle edilir.
+
+Her yazılımın yayınlanmadan önce güvenlik testlerinin yapılması zorunludur. Eğer yazılım yeterince güvenli değilse yayınlanma tarihi ertelenir. Yazılım daha güvenli hale getirildikten sonra yayınlanır.
+
+-Zafiyet: Bir sistemin ihtiyacı karşılamak üzere yapılmış tasarımının dışında işleri yapabilmenizi sağlayan aksaklıklıklara zafiyet denir.
+
+-Tehdit: Zarar verebilecek kişi, şahıs veya bot(?)
+
+-Risk: Tehdit ve zafiyetin kesiştiği noktadır.
+
+Her zafiyet 1-5 arasında derecelendirilir. Bu derecelendirme zafiyetin size olası etkileri baz alınarak belirlenir.
+
+-Exploit: Sömürme. Zafiyeti sömürmek için gönderdiğin kod. 
+
+-Payload: Exploit ile kontrolü elde edilen şeylerin kontrolü ele alındıktan sonra yapılan ve yapılabilecek işlemlere denir.
+
+---Genel Kavramlar
+
+1)Penetration test
+2)Vulnerability/Security Assessment
+3)Security Audit
+4)Ethical Hacking
+
+1-Sızma testi, hacking işleminin teknik aşamalarını kapsayan sürecin genel adıdır.
+2-Zafiyet araması, sızma testinin bir aşamasıdır.
+3-Hedefin güvenlik seviyesinin olması gereken seviyede olup olmadığını değerlendirmektir.
+4a-Hacking: Bir sistemi doğası dışında çalıştırabilme kabiliyetine hacking denir.
+4b-Ethical Hacking: Tespit edilen zafiyetin sistemi geliştirmek için kullanılmasına Ethical Hacking denir.
+
+etichal_hacking(pen_test(vuln_assessment(),sec_audit()))
+
+---Penetrasyon Testi Türleri
+
+1)Network Pen. Test
+2)Mobile Pen. Test
+3)Web Pen. Test
+4)Scada Pen. Test (Embedded(Gömülü) Systems)
+5)Wireless Pen. Test
+6)Social Engineering
+7)Dos/DDos/Loadtest
+
++Wireless neden Network'e dahil değil?
+-Wireless ortamında network olmak zorunda mı? Bluetooth?
+
++SQL Injection hangisine dahil?
+-Web geliştirme için kullanılan bir araç olduğundan web pen. test kategorisine girer.
+
+---Saldırı Aşamaları
+
+1)Reconnaissance(Bilgi Toplama)
+2)Scanning
+3)Exploitation
+4)Persistency
+5)Footprinting 
+6)1.aşamaya geri dön.
+
+1- Hedefin sınırlarını belirler. İçerideki şahıslar hakkında bilgi toplar. Bu aşama ile sosyal mühendislik kullanılarak saldırabilmek için bilgi elde edilebilir. Karşı hedef sistemde kullanılan yazılımlar, ürünler, işletim sistemleri öğrenilir. Bu aşamaya ait metotlar: Çöp karıştırmak, stalking...
+
+2- Hedef organizasyonun zafiyetlerin (açık olan girdi noktalarını dinleyen portların vs.) tespit edildiği bölüm.
+
+3- Zafiyetleri sömürerek gidilebilecek en uç noktaya gidilmesi işlemi.
+4- Kendinizi kalıcı kılmak için sistemde bir erişim noktası oluşturduğunuz bölüm. Bu aşamanın dahil edildiği örnek senaryo: kurum hali hazırda güvenlik için bir takıma sahiptir.(Blue Team). Bu takıma haber vermeden sizin saldırmanızı ister (Red Team) ve Blue Team'ın nasıl tepki vereceğini görmek ister.
+5- Yaptığımız işlemlerin izlerini temizlediğimiz bölüm.  
+7- Dos ve DDos sistemi aşırı yükleyerek yıkmak ister. Loadtest ise belli senaryolarda sistemin maksimum kapasitesini belirlemek için uygulanır.
+
+-Saldırgan ve pen. tester arasındaki iki fark daha: erişim yöntemi ve metotlar.-
+
+Zeroday: Bugün hiç kimsenin bilmediği, bir gün birinin rasgele ortaya çıkartacağı zafiyet.
+Pen. tester olarak zeroday bulmak gibi bir sorumluluğumuz yok.
+
+OSInt(Open Source Intelligence): Hani instagram'da eski sevgilisini yeni sevgilisinin fotoğrafıyla gören kız var ya, heh işte o fotoğrafı gördükten sonra gördüğü kızın teyzesinin oğlunun göbek adına kadar öğrenmesini sağlayan yöntemler işte. Türkçesi = Açık kaynak istihbaratı.
+
+---Metadolojiler---
+
+-İzlenilecek olan yöntemleri belirli bir standarta oturtmak için oluşturulmuş tanımlama sistemi.
+
+1)OSSTMM
+2)Nist 800-115(National Institute of Standards)
+3)OWASP testing guide
+4)Penetration Testing Framework
+5)ISSAF (Information System Security Assessment Framework)
+6)PTES (Penetration Testing Execution Standart)
+7)PCI(Payment Card Industry) Penetration Testing Guide
+
++Scope(kapsam) nasıl belirlenir?
+-Test yapılacak hedef hakkında bazı bilgiler öğrenildikten sonra çalışılan ortam, sistemin türleri, kullanılan teknolojiler öğrenilip belli bir profil çıkartılır. (Blog, e-ticaret sitesi, banka sitesi).Scope'da bu profile göre çizilir.
+
++Rapor nasıl yazılır?
+-Bulunan zafiyetler hedefe raporlanır. Ardından hedef bu zafiyetleri kapattığını belirttikten sonra aynı zafiyetler kullanılarak tekrar hackleme işlemi denenir. Eğer kapanmamışsa kapanana kadar zafiyet tekrar raporlanarak bu süreç devam eder. Zafiyetler kapandıktan sonra iş biter.
+
++Rapor formatları?
+1)Executive Summary(Yönetici Özeti): Teknik anlamda bilgi vermeyip, riskin geneliyle ilgili bilgilerin yer aldığı kısım.
+2)Introduction(Giriş): Anlaşmanın kimler arasında yapıldığı, ne zaman başlandığı, kapsam, raporlama süresi vs. bilgilerin bulunduğı kısım.
+3)Methodology(Metodoloji): Testin hangi yöntemler kullanılarak gerçekleştiğini anlatan kısım.
+4)Findings(Bulgular): Tehdit seviyeleri belirtilir.
+-Critical
+-High
+-Medium
+-Low
+-Info
+5)Conclusion(Sonuç): Özet.
+6)Appendings(Ekler): Bazı bulguların açıklamasına referans verdiğiniz kısımdır.
+
+Not: Şifre ve hangi makinelerin bu şifreye sahip olduğu hakkında yapılan tablo 1,2 veya 6.aşamaya dahil edilir.
+
++Pen. test iş süreci?
+-Kurumla anlaşırken NDA(Bilgi gizliliği anlaşması) imzalanır. Sonrasında testin kapsamının ortaya çıkarılması için test edilecek ortam hakkında bilgi alış-verişi yapılır. Ardından maliyet ve süre hesaplanır ve teklif yapılır. Kapsam(scope) belirlenir. İzin kağıdı alınır(hapse girmenizi önleyecek olan kağıt).
+
+Not: Rapor teslim edildikten sonra karşı tarafın aksiyon alması için 10-15 gün beklenir.
+
+Not2: Rapor çat diye yollanmaz. Rapor şifrelenir. Şifrelendikten sonra yollanır. Şifre de ayrı bir kanaldan yollanır. (NDA anlaşması gereği gizlilik kurallarını ihlal etmemek için) Ayrıca rapor belli bir süre(anlaşmada belirlenen) sonra silinir.
+
+Not3: Testler tek seferlik değil, belli süre aralığında tekrar tekrar yapılıyorsa rapor her test için ayrı ayrı yollanmak yerine süreç bittiğinde toplu olarak yollanabilir. Ayrıca tam tersi olarak, eğer çok kritik bir zafiyet bulunduysa sadece o zafiyeti özetleyen tek sayfalık bir rapor da acil olarak yollanabilir.
