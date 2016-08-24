@@ -153,8 +153,11 @@
 - 192.168.10.0/24 ip adresinin bir makinaya verilebilmesi için subnet mask ne olmalıdır?
 
   * 192.168.10.0 => 11000000.10101000.00001010.00000000
+  * 
     Normalde(Subnet mask): 11000000.10101000.00001010**|**.00000000
+
     1 sola kaydırırsak: 11000000.10101000.0000101**|**0.00000000 => hala network ip'sidir makinaya verilemez.
+    
     2 sola kaydırırsak: 11000000.10101000.000010**|**10.00000000 => sağ tarafta bir tane 1 olduğu için artık bu ip'yi bir makinaya verebiliriz.
 
   * 192.168.10.255/24 IP'sini bir makinaya verebilmek için ise çentiği normal konumdan bir kere sola kaydırmak yeterli.
