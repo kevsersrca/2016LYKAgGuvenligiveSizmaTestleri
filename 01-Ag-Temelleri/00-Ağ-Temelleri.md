@@ -162,22 +162,22 @@
 
   * 192.168.10.255/24 IP'sini bir makinaya verebilmek için ise çentiği normal konumdan bir kere sola kaydırmak yeterli.
   
-- Açık olan bir tcp portuna açık bir servisin koştuğu porta syn paketi yollarsak synack cevabı alırız. peki açık olan bir porta ack paketi yollarsak ne olur?
+- Açık olan bir TCP portuna SYN paketi yollarsak SYNACK cevabı alırız. Peki açık olan bir porta ACK paketi yollarsak ne olur?
 
   * Reset döner. Düzgün başlatmadığınızda veya herhangi bir problemle karşılaşıldığında o protokol sonlandırılır.
 
-- Kapalı bir porta syn yollarsak ne olur?
+- Kapalı bir porta SYN yollarsak ne olur?
 
   * Reset döner. Reset'in ne için döndüğünü(port başından beri mi kapalı yoksa bize mi kapatıldı(?)), hangi aşamada reset döndüğünü gözlemleyerek anlayabiliriz.
 
-- Port kesin açık. Güvenlik duvarı var. Syn gönderdik. Ne olur?
+- Port kesin açık. Güvenlik duvarı var. SYN gönderdik. Ne olur?
 
   * Belli olmaz. Reset dönebilir. Cevap dönmeyebilir.
 
-- Port açık mı kapalı mı bilmiyoruz. Syn gönderdik. Cevap gelmedi? Ne oldu?
+- Port açık mı kapalı mı bilmiyoruz. SYN gönderdik. Cevap gelmedi? Ne oldu?
 
   * Kesin olan şey: firewall.
 
-- Arada firewall var. Ack paketi gönderiyoruz. Reset dönüyor. Firewall'dan mı yoksa host'tan mı reset dönmüştür?
+- Arada firewall var. ACK paketi gönderiyoruz. Reset dönüyor. Firewall'dan mı yoksa host'tan mı reset dönmüştür?
 
-  * Bir de Syn paketi yollayarak anlaşılabilir. Eğer tekrar Reset dönüyorsa firewall'dan dönüyor demektir.
+  * Bir de SYN paketi yollayarak anlaşılabilir. Eğer tekrar Reset dönüyorsa firewall'dan dönüyor demektir.
