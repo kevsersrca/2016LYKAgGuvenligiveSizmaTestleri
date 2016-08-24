@@ -73,4 +73,4 @@
 
 - Bazen istemciler e-mail yolladıkları zaman, e-maili yollayan makinenin lokal IP adresini de, e-maili yollayan hakkındaki bilgiler kısmına eklerler.
 
--Active directory:Microsoft ağlarında kullanılan, bir servis üzerinden politika yoluyla ulaşılan dizin hizmetidir. Bu veritabanı, kullanıcılar, bigisayarlar, mekanlar, yazıcılar gibi organizasyonun tüm bilgilerini saklar.
+- Active directory:Microsoft ağlarında kullanılan, bir servis üzerinden politika yoluyla ulaşılan dizin hizmetidir. Bu veritabanı, kullanıcılar, bigisayarlar, mekanlar, yazıcılar gibi organizasyonun tüm bilgilerini saklar.
