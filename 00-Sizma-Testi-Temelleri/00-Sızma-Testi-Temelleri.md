@@ -1,12 +1,18 @@
 ## Sızma testi nedir?
 
-- Bir saldırgan profilinin en yakın haliyle sistemin zafiyetlerini tespit edip, bu zafiyetlerin risk haritasını çıkararak çözüm önerilerinde bulunulması hizmetine sızma testi denir.
-- Bir saldırgan ile bir pen. tester arasında üç temel fark vardır. Bunlar: kapsam, motivasyon ve zaman, erişim yöntemi ve metotlardır.
-- Saldırgan herhangi bir kapsam(sınır) tanımazken pen. tester hedef ile anlaştığı kapsamlar içerisinde çalışır. 
-- Her ikisinin de motivasyonları farklıdır. 
-- Saldırgan zaman konusunda sıkıntı yaşamaz. Pen. tester ise belirli bir süre içerisinde vereceği hizmeti tamamlar. Bu zaman dilimini müşteri ve pen. tester ortak belirler.
-- Müşteri günün sonunda zafiyetlerinin raporlanmasını bekler. Ayrıca bir saldırgan için tek bir zafiyet yeterli olabilir ancak pen. tester sistemi tamamen taramalıdır.
-- Her sızma testi sonucunda ortaya illa çok kritik zafiyatlar çıkacak diye bir kural yok. Bu pen. tester için işin handikapıdır.
+- Bir saldırgan profilinin en yakın haliyle sistemin zafiyetlerini tespit edip, bu zafiyet ve risklerin haritasının çıkarılıp raporlanmasıdır. Sızma testi sonucunda çözüm önerileri sunulabilir.
+
+- Bir saldırgan ile bir penetration tester arasında temel farklar vardır. Bunlar: kapsam, motivasyon ve zaman, erişim yöntemi ve metotlardır.
+
+- Saldırganların kapsamları hedeflerine ulaşabilecekleri kadarken penetration tester genel olarak bütün kapsamı incelemek zorundadırlar. 
+
+- Saldırganlar nefret veya çıkar için yaparken penetration testerlar iş olarak yaparlar bu yüzden motivasyonları farklıdır.
+
+- Saldırgan zaman konusunda sıkıntı yaşamaz. Pen. tester ise belirli bir süre içerisinde vereceği hizmeti tamamlar. Bu zaman dilimini müşteri ve penetration tester ortak belirler.
+
+- Müşteri günün sonunda zafiyetlerinin raporlanmasını bekler. Ayrıca bir saldırgan için tek bir zafiyet yeterli olabilir ancak penetration tester sistemi tamamen taramalıdır.
+
+- Her sızma testi sonucunda ortaya illa çok kritik zafiyetlar çıkacak diye bir kural yok. Bu pen. tester için işin handikapıdır.
 
 
 ## Sızma Testi Çeşitleri
@@ -19,9 +25,10 @@
 
 
 ## Genel Kavramlar
-**- Zafiyet:** Bir sistemin ihtiyacı karşılamak üzere yapılmış tasarımının dışında işleri yapabilmenizi sağlayan aksaklıklıklara zafiyet denir. Her zafiyet 1-5 arasında derecelendirilir. Bu derecelendirme zafiyetin size olası etkileri baz alınarak belirlenir.
 
-**- Tehdit:** Zarar verebilecek kişi, şahıs veya bot(?)
+**- Zafiyet:** Bir sistemin ihtiyacı karşılamak üzere yapılmış tasarımının dışında işleri yapabilmenizi sağlayan,tehtid ve risk oluşturabilicek ve karşı tarafta olmaması gereken problem(bug)lerdir. Zafiyetler size oluşturabileceği etkiye göre  1-5 arasında derecelendirilir.Zaman geçtikçe zafiyetlerin dereceleri değişim gösterebilmektedir.
+
+**- Tehdit:** Zarar verebilecek kişi, bilgi veya bot(?)
 
 **- Risk:** Tehdit ve zafiyetin kesiştiği noktadır.
 
@@ -31,22 +38,22 @@
 
 **- Penetration test:** Hacking işleminin teknik aşamalarını kapsayan sürecin genel adıdır.
 
-**- Vulnerability/Security Assessment:** Sızma testinin bir aşamasıdır.
+**- Vulnerability/Security Assessment:** Bir sistemdeki muhtemel tüm açıkların belirlenmesine yönelik tasarlanmış bir testtir. Sızma testinin bir aşamasıdır.
 
-**- Security Audit:** Hedefin güvenlik seviyesinin olması gereken seviyede olup olmadığını değerlendirmektir.
+**- Security Audit:** Hedefin güvenlik seviyesinin olması gereken seviyede olup olmadığını değerlendirmektir.(Endüstri Standartı)
 
 **- Hacking:** Bir sistemi doğası dışında çalıştırabilme kabiliyetine hacking denir.
 
-**- Ethical Hacking:** Tespit edilen zafiyetin sistemi geliştirmek için kullanılmasına Ethical Hacking denir.
+**- Ethical Hacking:** Tespit edilen zafiyetin sistemi geliştirmekte kullanılmasına ve çıkar elde edilmeden yapılan hackinge Ethical Hacking denir.
 
 
 ## Penetrasyon Testi Türleri 
 
-1. Network Pen. Test
-2. Mobile Pen. Test
-3. Web Pen. Test
-4. Scada Pen. Test (Embedded(Gömülü) Systems)
-5. Wireless Pen. Test
+1. Network Penetration Test
+2. Mobile Penetration Test
+3. Web Penetration Test
+4. Scada Penetration Test (Embedded(Gömülü) Systems)
+5. Wireless Penetration Test
 6. Social Engineering
 7. Dos/DDos/Loadtest
 
@@ -65,3 +72,5 @@
 ###### Notlar
 
 - Bazen istemciler e-mail yolladıkları zaman, e-maili yollayan makinenin lokal IP adresini de, e-maili yollayan hakkındaki bilgiler kısmına eklerler.
+
+-Active directory:Microsoft ağlarında kullanılan, bir servis üzerinden politika yoluyla ulaşılan dizin hizmetidir. Bu veritabanı, kullanıcılar, bigisayarlar, mekanlar, yazıcılar gibi organizasyonun tüm bilgilerini saklar.
