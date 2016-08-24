@@ -14,7 +14,7 @@
 
 **- Politika (Policy):** Taramalar için politikaların oluşturulduğu kısımdır. Politikayı kendimiz oluşturabilmek için Advanced Scan'ı seçmemiz gerekir.
 
-**-Tarama (Scan):** Hedeflerin belirlendiği ve taramanın başlatıldığı kısımdır.
+**- Tarama (Scan):** Hedeflerin belirlendiği ve taramanın başlatıldığı kısımdır.
 
 **- Nessus Remediations:** Basit çözüm önerilerinin bulunduğu sekme.
 
