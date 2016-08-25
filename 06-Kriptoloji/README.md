@@ -3,4 +3,4 @@
 Konu | Açıklama
 ---- | -----------
 [Kriptoloji](00-Kriptoloji.md) | Kriptoloji Algoritmaları
-[Hashcat](01-Hashcat.md) | Hashcat Kullanımı
+[Hashcat ve NTLM](01-Hashcat-ve-NTLM.md) | Hashcat Kullanımı, NTLM Hash ve Pass the Hash
