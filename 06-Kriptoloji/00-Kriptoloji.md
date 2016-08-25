@@ -2,9 +2,9 @@
 
 **- Kriptoloji:** Şifre bilimidir. Bir veriyi güvensiz bir ortamda bir uçtan diğer uca şifrelenerek iletilmesi ve iletilmiş verinin alıcı tarafından deşifre edilmesini inceler.
 
- * **-Plain-Text:** Açık (şifrelenmemiş) metin.
- * **-Cipher-Text:** Kapalı (şifrelenmiş) metin.
- * **-Secret Key:** Şifrelenme işleminin kurallarını belirten anahtar. 
+ * **- Plain-Text:** Açık (şifrelenmemiş) metin.
+ * **- Cipher-Text:** Kapalı (şifrelenmiş) metin.
+ * **- Secret Key:** Şifrelenme işleminin kurallarını belirten anahtar. 
 
 **- Ceasar Chiper:** Kaydırmalı şifrelemedir. Mesela "Deneme" kelimesi 3 sağa kaydırılarak "Dhqhph" olarak şifrelenir.
 
@@ -48,6 +48,23 @@
  * ECDSA (Elliptic Curve Digital Signature Algorithm)
 
 
+**- HASHING:** Verinin geri dönülemez biçimde özetinin alınmasıdır. Dosya doğrulama, şifre saklamada kullanılır.
+
+**Bazı Hash Fonksiyonları:**
+
+ * ***MD5:*** 32 bit uzunluğundadır. 0-9 ve a-f arası 16 karakterle özetleme işlemi yapılır. 
+   16^32 farklı MD5 hashi bulunur, bu da bir MD5 hashinin 1/16^32 olasılıkla tahmin edilebileceğini gösterir.
+
+ * ***SHA-1:*** 40 bit uzunluğundadır. 16 karakter kullanılarak oluşturulur.
+   Bir SHA-1 hashi 1/16^40 olasılıkla tahmin edilebilir.
+ * ***SHA-256:*** 256 bit uzunluğundadır. 16 karakter kullanılarak oluşturulur.
+   Bir SHA-256 hashi 1/16^256 olasılıkla tahmin edilebilir.
+ * ***SHA-512:*** 512 bit uzunluğundadır. 16 karakter kullanılarak oluşturulur.
+   Bir SHA-512 hashi 1/16^512 olasılıkla tahmin edilebilir.
+
+  ***MD5 Collusion Attack:*** Sonsuz veri uzayı içerisinde 16^32 MD5 hashi kullanılıyor. İki farklı verinin hashleri aynı olabilir.
+  
+  ***Hash'lerin uzunlukları arttıkca kırılması o kadar zorlaşır. MD5 fonksiyonu çok hızlı olduğu için kırılması daha kolaydır.***
 
 
 
