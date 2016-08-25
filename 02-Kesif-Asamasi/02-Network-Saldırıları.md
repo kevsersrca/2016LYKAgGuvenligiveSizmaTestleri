@@ -87,7 +87,7 @@
 
 - TCP'de IP spoofing, olmayan bir IP spoof edilerek karşıya kör(blind) bir şekilde, cevapları almadan sürekli paket yollanılarak yapılır. Eğer spoof ettiğimiz IP gerçekten kullanılıyor ise, RST döner.
 
-- [Scapy ile SYN Flood ödevi](Syn_Flood/syn_flood.py)
+- [Scapy ile SYN Flood ödevi](../99-Scapy-Ornekleri/Scapy_Syn_Flood/syn_flood.py)
 
-- [Scapy ile SNMP bilgi toplama ödevi](Scapy_SNMP/scapy_snmp.py)
+- [Scapy ile SNMP bilgi toplama ödevi](../99-Scapy-Ornekleri/Scapy_SNMP/scapy_snmp.py)
 
