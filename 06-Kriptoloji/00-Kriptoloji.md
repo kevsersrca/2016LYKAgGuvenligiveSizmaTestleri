@@ -19,6 +19,8 @@
   
 **- Frekans Analizi:** Şifrede en sık geçen karakter bulunur. En sık kullanılan harfler olarak denenir. Daha sonra ikili frekans analizine bakılır. Örnek: İngilizce TH yi çok sık kullanır (the, those, there...). Mono Alpha. Subs. Chipers algoritmaları ile şifrelenen metinlerin çözümlemesinde kullanılır.
 
+  ***Frekans Analizi Aracı:*** http://quipqiup.com/
+
 **- XOR Şifreleme:** Plain Text metin ile aynı boyutta bir secret key ile XOR'lanması ile gerçekleştirilir. Alıcı tarafında tekrar çözümlenirken aynı secret key ile tekrar XOR işleminden geçirilir.
   
   S ⊕ P ⊕ S = P => S ⊕ P = C ----> C ⊕ S = P
@@ -66,6 +68,15 @@
   
    ***Hash'lerin uzunlukları arttıkca kırılması o kadar zorlaşır. MD5 fonksiyonu çok hızlı olduğu için kırılması daha kolaydır.***
 
-
+  **Rainbow Attack:** Hacklenen kurumlardan elde edilen parolalar Rainbow table adı verilen yönlemle internet üzerinde hash veritabanlarında yayınlanır (DUMP) . Bu Rainbow Table'larda parolalar ve o parolaya ait tüm hashleriyle birlikte tutulur. Bu rainbow table'lar kullanılarak bir hashin parola karşılığına çok çabuk ulaşılabilir.
+  
+  ***Bazı Hash Veritabanları:***
+   * https://crackstation.net/
+   * http://project-rainbowcrack.com/table.htm
+   * http://www.pwcrack.com/rainbowtables.shtml
+   * https://hashkiller.co.uk/
+   * http://www.md5online.org/
+   * https://hashtoolkit.com/
+   
 
 
