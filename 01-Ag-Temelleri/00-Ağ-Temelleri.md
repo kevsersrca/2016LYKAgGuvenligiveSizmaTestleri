@@ -48,7 +48,7 @@
   
 **- DNS:** Domainlerin eşleşen IP'lerini bulmamızı sağlayan sunuculardır. Eğer DNS sunucusu, sorduğumuz domain'in IP'sine sahip değilse, içerisinde statik olarak kazılı olan ROOT DNS sunucularına sorar. DNS IP'yi elde ettiğinde bir daha aramamak için IP adresini cache içerisinde istediği domainden sorumlu sunucunun belirlediği süre boyunca saklar.
 
-  * DNS Kayıt Türleri: Ağ, mx, cname, ns, Ptr, SOA, txt
+  * DNS Kayıt Türleri: A, mx, cname, ns, Ptr, SOA, txt
     
     * **A kaydı:** İstenilen domain'in IP adresini kaydeder.
     
