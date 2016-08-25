@@ -239,6 +239,6 @@
     
     => arp-scan -l -I eth0 (yerel ağdaki bütün makineleri tarayarak sonuç alma işlemi yapar)
     
-  - [Scapy ile DNS Zone Scan ödevi](DNS_Zone_Scan/cakmafierce.py)
+  - [Scapy ile DNS Zone Scan ödevi](../99-Scapy-Ornekleri/Scapy_DNS_Zone_Scan/cakmafierce.py)
   
-  - [Scapy ile ARP taraması ödevi](ARP_Taraması/arp_scan.py)
+  - [Scapy ile ARP taraması ödevi](../99-Scapy-Ornekleri/Scapy_ARP_Scan/arp_scan.py)
