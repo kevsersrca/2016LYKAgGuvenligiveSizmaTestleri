@@ -20,17 +20,23 @@
 
 **- MAC Adresi:** Kullanılan donanımın adresi. 48bit. AA:BB:CC:DD:EE:FF formatında gösterilir. AA:BB:CC kısmı üretici kimliğinin yer aldığı kısımdır ve unique(eşsiz)dir. DD:EE:FF kısmı ürün kimliğinin yer aldığı kısımdır.
 
-**- ARP:** MAC bilgisi kullanılarak sistemin fiziksel konumunu tespit eden protokol.
+**- ARP:** IP adresi bilgisi kullanılarak sistemin fiziksel (MAC) adresini tespit eden protokol. ARP protokolünün hiçbir kontrol mekanizması yoktur.
 
   * Sınıf içerisinde Mehmet ile ulaşılmak isteniyor. Mehmet kim bilmiyoruz. Ne yaparız? Sınıfa gideriz. Mehmet kim diye bağırırız. Mehmet elini kaldırır ve elini kaldıran kişiyle konuşuruz.
 
-**- RARP:** Fiziksel konumu bilinen sistemle iletişim kurarak sistemin MAC adresini öğrenmemizi sağlayan protokol.
+**- RARP:** Fiziksel (MAC) adresi bilinen sistemin IP adresini öğrenmemizi sağlayan protokoldür.
 
   * Sınıfta 3.kümeden 5.sıradaki kişiyle konuşmam gerekiyor. Sınıfa gidip o kişinin kim olduğunu öğrenip o kişiyle konuşuruz.
   
 - Mektubu adresine teslim edebilmek için 1)Kime yolladığımız 2)Nerede olduğu bilgisine ihtiyacımız var. ARP protokolünde 1 var, bunla 2'yi elde ediyoruz. RARP protokolünde 2 var, bunla 1'i elde ediyoruz.
 
 **- TCP (Three-way handshake):** Bir bilgisayarla haberleşmek istediğiniz zaman bu haberleşme isteğini karşı tarafa bildirilip karşı taraftan da onay alırsa iletişimin kurulduğu ve bu iletişimin sonlandırılana kadar geçer zaman içerisinde herhang bir kayıp veya sorun yaşanmamasını garanti etmeye çalışan protokoldür.
+ '''
+ A              B
+ | ----SYN----> |
+ | <--SYN+ACK-- |  Three-way Handshake
+ | ----ACK----> |
+ '''
 
 **- UDP:** TCP'den farklı olarak dosyanın ulaşıp ulaşmadığını kontrol etmez. Daha hızlıdır. (shoot and forget) TCP'de veri 4.pakette yollanmaya başlanırken UDP'de veri 1.paketten itibaren yollanır. Yani UDP TCP'den 4 kat daha hızlıdır.
 
@@ -42,15 +48,15 @@
 
   * DNS Kayıt Türleri: Ağ, mx, cname, ns, Ptr, SOA, txt
     
-    * **Ağ kaydı:** İstenilen domain'in IP adresini kaydeder.
+    * **A kaydı:** İstenilen domain'in IP adresini kaydeder.
     
     * **mx kaydı:** Her DNS sunucusu bir ya da birden fazla zone(alan)'dan sorumludur. O alan adından sorumlu mail sunucuların bulunduğu kayıt.
     
     * **cname kaydı:** Alias. Ağ kayıtlarına işaret eden takma ad.
     
-    * **ns kaydı:** Alan adı ile sunucu arasındaki yolun bulunduğu kayıt.
+    * **ns kaydı:** Alan adına ait authoritative DNS sunucusunun kaydının tutulduğu türdür.
     
-    * **Ptr kaydı:** IP adresi verip domain sorduğumuzda geri dönen kayıt türü.
+    * **Ptr kaydı:** IP adresi verip domain sorduğumuzda geri dönen kayıt türü. (Reverse DNS)
     
     * **SOA kaydı:** Zone'un kendisine dair ve master dns sunucusuna dair bilgilerin bulunduğu kayıt.
     
@@ -130,7 +136,7 @@
     
     192.168.0.0     -   192.168.255.255 (192.168/16 prefix)
 
-- Yani eğer birisi 172.18 ip adresinden saldırı alıyorum diyorsa, ya yerel ağdan saldırı geliyordur, ya da ip adresi değiştirilmiştir.
+- Eğer birisi 172.18 ip adresinden saldırı alıyorum diyorsa, ya yerel ağdan saldırı geliyordur, ya da ip adresi değiştirilmiştir.
 
 **- Multicast:** grup mesajı
 
