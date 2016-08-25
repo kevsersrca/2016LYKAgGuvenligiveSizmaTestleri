@@ -1,5 +1,12 @@
 ## Aktif Bilgi Toplama
 
+**İç Ağdaki Aktif Makinaların Tespiti:**
+  
+  => netdiscover -i eth0 <IP Range>
+  => nmap -sP <IP Range>  --> ping sweep yöntemi ile
+  => nmap -PR <IP Range>
+  => arp-scan --interface=eth0 --localnet
+
 **- NMAP:** Hedef hangi zafiyetlere sahip, açık portlar hangileri vs. analizler yapan tool. Sürekli istek yapmak bir anomalidir. Karşı taraf bunu fark edip bizi engelleyebilir.
 
 **- Örnekler:**
