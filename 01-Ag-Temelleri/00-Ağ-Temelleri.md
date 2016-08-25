@@ -31,12 +31,12 @@
 - Mektubu adresine teslim edebilmek için 1)Kime yolladığımız 2)Nerede olduğu bilgisine ihtiyacımız var. ARP protokolünde 1 var, bunla 2'yi elde ediyoruz. RARP protokolünde 2 var, bunla 1'i elde ediyoruz.
 
 **- TCP (Three-way handshake):** Bir bilgisayarla haberleşmek istediğiniz zaman bu haberleşme isteğini karşı tarafa bildirilip karşı taraftan da onay alırsa iletişimin kurulduğu ve bu iletişimin sonlandırılana kadar geçer zaman içerisinde herhang bir kayıp veya sorun yaşanmamasını garanti etmeye çalışan protokoldür.
- '''
+ ```
  A              B
  | ----SYN----> |
  | <--SYN+ACK-- |  Three-way Handshake
  | ----ACK----> |
- '''
+ ```
 
 **- UDP:** TCP'den farklı olarak dosyanın ulaşıp ulaşmadığını kontrol etmez. Daha hızlıdır. (shoot and forget) TCP'de veri 4.pakette yollanmaya başlanırken UDP'de veri 1.paketten itibaren yollanır. Yani UDP TCP'den 4 kat daha hızlıdır.
 
