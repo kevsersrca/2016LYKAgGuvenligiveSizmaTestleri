@@ -1,4 +1,4 @@
----Tünelleme:
+#Tünelleme:
 
 -ip | icmp | ip | tcp (örnek paket)
 
@@ -14,11 +14,11 @@
 
 -Local proxy:
 
-=> ssh -D8080 209.208.110.70 -l barkink
-=>password
-=> netstat -lntup
-=> mozilla proxy => socket proxy
+    => ssh -D8080 209.208.110.70 -l barkink
+    => password
+    => netstat -lntup
+    => mozilla proxy => socket proxy
 
-=> ssh 209.208.110.70 -l barkink -R 8080:192.168.0.1:80 (remote)
+    => ssh 209.208.110.70 -l barkink -R 8080:192.168.0.1:80 (remote)
 
-=> ssh 209.208.110.70 -l barkink -L 8080:192.168.0.1:80 (local)
+    => ssh 209.208.110.70 -l barkink -L 8080:192.168.0.1:80 (local)
