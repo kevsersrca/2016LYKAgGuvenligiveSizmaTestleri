@@ -106,6 +106,11 @@
 
 **- Port:** Bir makinenin üzerinde kendinden başka makinelerin ulaşabilmesi için açılan bir kapı olarak düşünülebilir. Birden fazla servise erişmek için bu kapılardan hangisi uygunsa oradan girip ordan konuşmaya sağlayan açık kapılardır. Kaç port vardır? 2^16 (Source-Port 16bit olduğu için)
 
+ * Bir ağda IP havuzu dolarsa, o ağa yeni gelen client IP alamaz. O client'a Apipa IP verilir. DHCP hiçbir zaman broadcast'e kira süresi dolan var mı diye sormaz.
+ * Bir ağda IP avuzları dolu olmayan iki DHCP server varsa; Client, IP isterse en hızlı IP veren DHCP sunucusuna kaydolur. Bu DHCP sunucusu bir saldırgan da olabilir.
+ * Bir Client(saldırgan) sürekli MAC adresi değiştirerek DHCP sunucusundan IP isterse bu DHCP sunucusuna yönelik bir DoS saldırısı olur.
+ * Bir ağda bulunan DHCP sunucusunun verdiği IP'lerin lease (kira) süreleri dolmak üzereyken, yeni bir DHCP sunucusu (saldırgan) ağa dahil olursa, clientlar IP adreslerini yeni DHCP sunucusundan alırlar. Böylece yeni DHCP sunucusunun vereceği gateway adresi üzerinden ağ iletişim kuracağı için saldırgan tüm ağı dinleyebilir. (MiTM- Man in The Middle Attack)
+
 **- IP(Internet Protocol):** Her bir makinanın kendine ait eşsiz bir adresi olsun diye geliştirilmiş bir protokol. Kullanılan iki versiyonu vardır. IPv4 => 32bit IPv6 => 128bit 
 
   * IPv4: 192.168.1.1 => IIIIIIII.IIIIIIII.IIIIIIII.IIIIIIII (10'luk sistemdeki sayıyı 2'lik sisteme dönüştürmek) Mümkün aralık: 0.0.0.0 - 255.255.255.255
