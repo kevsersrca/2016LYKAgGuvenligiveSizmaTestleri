@@ -43,6 +43,8 @@
   - UDP, açık olan portu ve servisi bilip bunlara paket yolladığınızda, ancak o zaman cevap alacağınız bir protokoldür. Eğer buna rağmen cevap gelmiyorsa 2 ihtimal vardır. Ya servis yolladığınız paketi anlamadı, ya da arada firewall var.
   
   - UDP ile veri yolladığımız port kapalıysa ve firewall yoksa; ICMP port kapalı mesajı döndürür.
+
+**- Port:** Bir makinenin üzerinde kendinden başka makinelerin ulaşabilmesi için açılan bir kapı olarak düşünülebilir. Birden fazla servise erişmek için bu kapılardan hangisi uygunsa oradan girip ordan konuşmaya sağlayan açık kapılardır. Kaç port vardır? 2^16 (Source-Port 16bit olduğu için)
   
 **- DNS:** Domainlerin eşleşen IP'lerini bulmamızı sağlayan sunuculardır. Eğer DNS sunucusu, sorduğumuz domain'in IP'sine sahip değilse, içerisinde statik olarak kazılı olan ROOT DNS sunucularına sorar. DNS IP'yi elde ettiğinde bir daha aramamak için IP adresini cache içerisinde istediği domainden sorumlu sunucunun belirlediği süre boyunca saklar.
 
@@ -103,8 +105,6 @@
 **- Router:** Ağa bağlanabilme kapasitesi olan makinelerin ilgili ağlara yönlendirmesini yapan makinedir.
 
 **- Gateway:** Kargo firmaları örneği. Nasıl gideceğinizi bilmediğiniz yerlere verilerinizi gönderebilmeniz için aracılık yapan router'lara gateway denir.
-
-**- Port:** Bir makinenin üzerinde kendinden başka makinelerin ulaşabilmesi için açılan bir kapı olarak düşünülebilir. Birden fazla servise erişmek için bu kapılardan hangisi uygunsa oradan girip ordan konuşmaya sağlayan açık kapılardır. Kaç port vardır? 2^16 (Source-Port 16bit olduğu için)
 
  * Bir ağda IP havuzu dolarsa, o ağa yeni gelen client IP alamaz. O client'a Apipa IP verilir. DHCP hiçbir zaman broadcast'e kira süresi dolan var mı diye sormaz.
  * Bir ağda IP avuzları dolu olmayan iki DHCP server varsa; Client, IP isterse en hızlı IP veren DHCP sunucusuna kaydolur. Bu DHCP sunucusu bir saldırgan da olabilir.
