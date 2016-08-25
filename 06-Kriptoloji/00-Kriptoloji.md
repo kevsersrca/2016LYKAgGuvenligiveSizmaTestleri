@@ -77,6 +77,7 @@
    * https://hashkiller.co.uk/
    * http://www.md5online.org/
    * https://hashtoolkit.com/
+   * http://www.cmd5.org/
    
 
 
