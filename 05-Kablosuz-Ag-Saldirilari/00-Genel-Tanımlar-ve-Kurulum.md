@@ -26,7 +26,7 @@
 
 **- Data:** Bilgi alış-verişinin yapıldığı paket sayısı.
 
-**- MB: (?)**
+**- MB:** AP'in maksimum kablosuz ağ hızı. QoS destekli ise "e" harfi bulunur.
 
 **- ENC:** Kullanılan şifreleme hakkında bilgi verir.
 
@@ -46,7 +46,7 @@
 
 **- STATION:** Erişim noktasına bağlanan makinelerin MAC adresleri.
 
-**- Rate:** 
+**- Rate:** AP ile Client - Client ile AP arası Mbps cinsinden veri iletim hızı.
 
 **- Lost:** Kayıp paketler.
 
