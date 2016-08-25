@@ -30,11 +30,18 @@
     Eğer ortaki adam şifrelenmiş C2 ve C7 metinlerini ele geçirirse ve birbiri ile XOR işlemi yaparsa;
      C2 ⊕ C7 = (P2 ⊕ S) ⊕ (P7 ⊕ S) = (P2 ⊕ S ⊕ S) ⊕ P7 = (P2 ⊕ 0) ⊕ P7 = **P2 ⊕ P7** --> P2 ve P7 metinlerinin üst üste gelmiş halini tespit etmiş olur.
 
-**- Symmetric Encryption:**
+**- Symmetric Encryption:** Tek anahtarlı şifrelemeye dayanır. Sadece secret key'i vardır.
+
  * DES (Data Encryption Standard)
+ * 3DES (Triple DES)
  * AES (Advanced Encryption Standard)
 
-**- Asymmetric Encryption:**
+  ***-Known Plain-text Attack:*** Plain-text'in bir kısmının çözülmesi halinde bütün plain-text'i çözen saldırı. Alan Turing (Film: The Imitation Game, Başrol: Benedict Cumberbatch)
+ 
+ 
+
+**- Asymmetric Encryption:** Çift anahtarlı şifrelemeye dayanır. Public ve Private Key olarak iki anahtar kullanılır. Private key'in hiçbir zaman iletimi yapılmaz.
+
  * **Diffie & Hellman Key Exchange Algorithm**
  * DSA (Digital Signature Algorithm)
  * RSA (Ron **R**ivest, Adi **S**hamir,Leonard **A**dleman Encryption Algorithm)
