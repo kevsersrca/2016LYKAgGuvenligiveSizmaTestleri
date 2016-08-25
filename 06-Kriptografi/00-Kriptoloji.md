@@ -30,6 +30,16 @@
     Eğer ortaki adam şifrelenmiş C2 ve C7 metinlerini ele geçirirse ve birbiri ile XOR işlemi yaparsa;
      C2 ⊕ C7 = (P2 ⊕ S) ⊕ (P7 ⊕ S) = (P2 ⊕ S ⊕ S) ⊕ P7 = (P2 ⊕ 0) ⊕ P7 = **P2 ⊕ P7** --> P2 ve P7 metinlerinin üst üste gelmiş halini tespit etmiş olur.
 
+**- Symmetric Encryption:**
+ * DES (Data Encryption Standard)
+ * AES (Advanced Encryption Standard)
+
+**- Asymmetric Encryption:**
+ * **Diffie & Hellman Key Exchange Algorithm**
+ * DSA (Digital Signature Algorithm)
+ * RSA (Ron **R**ivest, Adi **S**hamir,Leonard **A**dleman Encryption Algorithm)
+ * ECDSA (Elliptic Curve Digital Signature Algorithm)
+
 
 
 
