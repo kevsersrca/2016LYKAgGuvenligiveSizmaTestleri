@@ -30,17 +30,24 @@
 
     B> Google üzerinden site:*.ankara.edu.tr şeklinde arama yaparsak subdomainlere ulaşabiliriz.
     
-    Ayrıca fierce aracı da bize subdomainleri listeler.
+    Ayrıca bazı araçlar da bize subdomainleri listeler.
     
       => fierce -dns ankara.edu.tr
+      => theharvester -d ankara.edu.tr -b all
+      => dnsmap ankara.edu.tr
 
 **- Hedefe ait virtualhost'ların tespiti:** 
 
     B> bing.com arama motorundan IP:x.y.z.a şeklinde arama yaptığımızda virtualhost'lara ulaşabiliriz.
+    
+    Ayrıca bazı araçlar da bize subdomainleri listeler.
+        => dig -x <IP>
+        => nslookup <IP>
 
 **- Hedefe ait e-mailler:** 
 
     => theharvester -d ankara.edu.tr -b bing
+    Bu mail adresleri kullanılarak çeşitli sosyal mühendislik saldırıları yapılabilir.
 
 **- Hedefe ait indirilebilir dosyalar:** 
 
@@ -62,7 +69,7 @@
 
 **- FOCA:** Hedefe ait indirilebilir bütün veya bazı dosyaları düzenli bir şekilde indirip analiz edebilmemizi sağlayan tool. Metadata analizleri sayesinde bir çok bilgi elde edilebilir. Sadece windows'da çalışıyor :(
 
-**- Robtex:** B> www.robtex.com : Sorgulanan sitenin network'ünü şema halinde gösteren servis.
+**- Robtex:** B> www.robtex.com : Sorgulanan sitenin DNS network'ünü şema halinde gösteren servis.
 
 **- Google üzerinden keşif işlemleri:** Google filtreleri hakkında detaylı bilgiler 
 
@@ -109,3 +116,4 @@
 ###### Notlar
 
   - Saldırmadan önce bulabildiğimiz her şeyi toplamaya çalışacağız.
+  - OSINT için güzel bir örnek :) : https://eksisozluk.com/entry/47201385
