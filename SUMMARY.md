@@ -19,5 +19,5 @@
 * [04-Exploit Aşaması](04-Exploit-Asamasi/README.md)
    * [Exploit Aşaması](04-Exploit-Asamasi/00-Exploit-Aşaması.md)
 * [05-Kablosuz Ağ Saldırıları](05-Kablosuz-Ag-Saldirilari/README.md)
-   * Genel Tanımlar ve Kurulum
+   * [Genel Tanımlar ve Kurulum](05-Kablosuz-Ag-Saldirilari/00-Genel-Tanımlar-ve-Kurulum.md)
 
