@@ -13,5 +13,5 @@
 * [02-Keşif Aşaması](02-Kesif-Asamasi/README.md)
    * [Pasif Bilgi Toplama](02-Kesif-Asamasi/00-Pasif-Bilgi-Toplama.md)
    * [Aktif Bilgi Toplama](02-Kesif-Asamasi/01-Aktif-Bilgi-Toplama.md)
-   * Network Saldırıları
+   * [Network Saldırıları](02-Kesif-Asamasi/02-Network-Saldırıları.md)
 
