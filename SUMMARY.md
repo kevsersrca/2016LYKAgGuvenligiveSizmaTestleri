@@ -27,5 +27,5 @@
    * [Tünelleme](06-Kriptoloji/03-tünelleme.md)
 * [99-Scapy Örnekleri](99-Scapy-Ornekleri/README.md)
    * [Arp Scan](99-Scapy-Ornekleri/Scapy_ARP_Scan/arp_scan.py)
-   * Dns Zone Scan
+   * [Dns Zone Scan](99-Scapy-Ornekleri/Scapy_DNS_Zone_Scan/cakmafierce.py)
 
