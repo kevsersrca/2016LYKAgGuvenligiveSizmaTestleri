@@ -11,5 +11,5 @@
    * [Scapy ile Paket Oluşturma](01-Ag-Temelleri/02-Scapy-İle-Paket-Oluşturma.md)
    * [Tcpdump](01-Ag-Temelleri/03-Tcpdump.md)
 * [02-Keşif Aşaması](02-Kesif-Asamasi/README.md)
-   * Pasif Bilgi Toplama
+   * [Pasif Bilgi Toplama](02-Kesif-Asamasi/00-Pasif-Bilgi-Toplama.md)
 
