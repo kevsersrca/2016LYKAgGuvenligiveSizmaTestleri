@@ -15,4 +15,5 @@
    * [Aktif Bilgi Toplama](02-Kesif-Asamasi/01-Aktif-Bilgi-Toplama.md)
    * [Network Saldırıları](02-Kesif-Asamasi/02-Network-Saldırıları.md)
 * [03-Zafiyet Tespiti](03-Zafiyet-Tespiti/README.md)
+   * Zafiyet Tespiti
 
