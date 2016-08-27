@@ -10,5 +10,5 @@
    * [Paket Başlıkları](01-Ag-Temelleri/01-Paket-Başlıkları.md)
    * [Scapy ile Paket Oluşturma](01-Ag-Temelleri/02-Scapy-İle-Paket-Oluşturma.md)
    * [Tcpdump](01-Ag-Temelleri/03-Tcpdump.md)
-* 02-Keşif Aşaması
+* [02-Keşif Aşaması](02-Kesif-Asamasi/README.md)
 
