@@ -6,7 +6,7 @@
 
 - Saldırganların kapsamları hedeflerine ulaşabilecekleri kadarken penetration tester genel olarak bütün kapsamı incelemek zorundadırlar. 
 
-- Saldırganlar nefret veya çıkar için yaparken penetration testerlar iş olarak yaparlar bu yüzden motivasyonları farklıdır.
+- Saldırganlar sızma testini nefret veya çıkar için yaparken penetration tester sızma testini iş olarak yapar. Bu yüzden motivasyonları farklıdır.
 
 - Saldırgan zaman konusunda sıkıntı yaşamaz. Pen. tester ise belirli bir süre içerisinde vereceği hizmeti tamamlar. Bu zaman dilimini müşteri ve penetration tester ortak belirler.
 
@@ -26,7 +26,7 @@
 
 ## Genel Kavramlar
 
-**- Zafiyet:** Bir sistemin ihtiyacı karşılamak üzere yapılmış tasarımının dışında işleri yapabilmenizi sağlayan,tehtid ve risk oluşturabilicek ve karşı tarafta olmaması gereken problem(bug)lerdir. Zafiyetler size oluşturabileceği etkiye göre  1-5 arasında derecelendirilir.Zaman geçtikçe zafiyetlerin dereceleri değişim gösterebilmektedir.
+**- Zafiyet:** Bir sistemin ihtiyacı karşılamak üzere yapılmış tasarımının dışında işleri yapabilmenizi sağlayan,tehdit ve risk oluşturabilicek ve karşı tarafta olmaması gereken problem(bug)lerdir. Zafiyetler size oluşturabileceği etkiye göre  1-5 arasında derecelendirilir.Zaman geçtikçe zafiyetlerin dereceleri değişim gösterebilmektedir.
 
 **- Tehdit:** Zarar verebilecek kişi, bilgi veya bot(?)
 
