@@ -12,3 +12,7 @@ Konu | Açıklama
 [Kablosuz Ağ Saldırıları](05-Kablosuz-Ag-Saldirilari/README.md) | Temel kavramlar ve aircrack-ng, wireshark gibi araçlarının kullanımı
 [Kriptoloji](06-Kriptoloji/README.md) | Kriptoloji Algoritmaları ve hashcat kullanımı
 [Scapy Örnekleri](99-Scapy-Ornekleri/README.md) | Scapy ile yazılan scriptler
+
+## Siber Güvenlik Notları
+
+Türkiye'de yapılan Siber Güvenlik eğitimleri ile ilgili hazırlanmış diğer notlara erişmek için; [bu gist](https://gist.github.com/yavuzovski/09d527df4fccddc747fb872f2eeb51bf)'e göz atabilirsiniz.
